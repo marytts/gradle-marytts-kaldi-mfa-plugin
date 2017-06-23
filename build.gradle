@@ -1,2 +1,16 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+}
+
 group 'de.dfki.mary'
 version '0.1-SNAPSHOT'
+
+gradlePlugin {
+    plugins {
+        maryttsKaldiMfaPlugin {
+            id = 'marytts-kaldi-mfa'
+            implementationClass = 'de.dfki.mary.voicebuilding.MaryttsKaldiMfaPlugin'
+        }
+    }
+}
