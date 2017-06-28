@@ -17,12 +17,25 @@ class MaryttsKaldiMfaPluginFunctionalTest {
             buildscript.println 'plugins {'
             buildscript.println "  id 'marytts-kaldi-mfa'"
             buildscript.println '}'
+            buildscript.println 'convertTextToMaryXml {'
+            buildscript.println '  srcDir = file("text")'
+            buildscript.println '  destDir = file("\$buildDir/maryXml")'
+            buildscript.println '}'
         }
+        def textFile = new File("$projectDir/text/fnord.txt")
+        textFile.parentFile.mkdirs()
+        textFile.text = "Fnord."
     }
 
     @Test
     void canApplyPlugin() {
         def result = gradle.withArguments().build()
         assert true
+    }
+
+    @Test
+    void testConvertTextToMaryXml() {
+        def result = gradle.withArguments('convertTextToMaryXml').build()
+        println result.output
     }
 }

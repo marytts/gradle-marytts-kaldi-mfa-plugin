@@ -20,7 +20,17 @@ repositories {
 }
 
 dependencies {
+    runtime 'de.dfki.mary:marytts-voicebuilding:0.1'
+    runtime 'de.dfki.mary:marytts-lang-en:5.2'
     testCompile 'org.testng:testng:6.9.6'
+}
+
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            force 'org.codehaus.groovy:groovy-all:2.4.10'
+        }
+    }
 }
 
 test {
