@@ -12,7 +12,7 @@ class PrepareForcedAlignment extends DefaultTask {
     File wavDir
 
     @OutputDirectory
-    File forcedAlignmentDir
+    File forcedAlignmentDir = project.file("$project.buildDir/forcedAlignment")
 
     @TaskAction
     void prepare() {

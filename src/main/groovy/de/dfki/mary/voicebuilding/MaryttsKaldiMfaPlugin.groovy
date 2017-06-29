@@ -19,6 +19,13 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             marytts 'de.dfki.mary:marytts-lang-en:5.2'
         }
         project.task('convertTextToMaryXml', type: ConvertTextToMaryXML)
-        project.task('prepareForcedAlignment', type: PrepareForcedAlignment)
+        project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
+            dependsOn project.convertTextToMaryXml
+            maryXmlDir = project.convertTextToMaryXml.destDir
+        }
+        project.task('runForcedAlignment', type: RunForcedAlignment) {
+            dependsOn project.prepareForcedAlignment
+            srcDir = project.prepareForcedAlignment.forcedAlignmentDir
+        }
     }
 }
