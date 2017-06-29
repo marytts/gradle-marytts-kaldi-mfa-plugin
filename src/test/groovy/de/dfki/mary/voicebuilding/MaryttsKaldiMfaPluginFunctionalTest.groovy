@@ -17,10 +17,6 @@ class MaryttsKaldiMfaPluginFunctionalTest {
             buildscript.println 'plugins {'
             buildscript.println "  id 'marytts-kaldi-mfa'"
             buildscript.println '}'
-            buildscript.println 'convertTextToMaryXml {'
-            buildscript.println '  srcDir = file("text")'
-            buildscript.println '  destDir = file("\$buildDir/maryXml")'
-            buildscript.println '}'
         }
         def textFile = new File("$projectDir/text/fnord.txt")
         textFile.parentFile.mkdirs()

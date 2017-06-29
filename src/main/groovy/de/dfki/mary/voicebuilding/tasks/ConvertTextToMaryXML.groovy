@@ -4,10 +4,10 @@ import org.gradle.api.tasks.*
 
 class ConvertTextToMaryXML extends DefaultTask {
     @InputDirectory
-    File srcDir
+    File srcDir = project.file("text")
 
     @OutputDirectory
-    File destDir
+    File destDir = project.file("$project.buildDir/maryxml")
 
     @TaskAction
     void convert() {
