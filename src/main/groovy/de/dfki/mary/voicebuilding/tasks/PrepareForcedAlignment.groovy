@@ -9,7 +9,7 @@ class PrepareForcedAlignment extends DefaultTask {
     File maryXmlDir
 
     @InputDirectory
-    File wavDir
+    File wavDir = project.file("$project.buildDir/wav")
 
     @OutputDirectory
     File forcedAlignmentDir = project.file("$project.buildDir/forcedAlignment")
