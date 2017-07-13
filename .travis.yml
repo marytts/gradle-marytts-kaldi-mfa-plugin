@@ -12,11 +12,6 @@ language: groovy
 jdk:
   - oraclejdk8
 
-addons:
-  apt:
-    packages:
-    - docker
-
 script: ./gradlew check --info
 
 before_cache:
