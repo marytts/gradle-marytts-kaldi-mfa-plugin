@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
+    }
+
+    dependencies {
+        classpath group: 'org.m2ci.msp', name:'jtgt', version: '0.6-SNAPSHOT'
+    }
+}
+
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'

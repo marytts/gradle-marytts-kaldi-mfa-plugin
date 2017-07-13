@@ -27,5 +27,9 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             dependsOn project.prepareForcedAlignment
             srcDir = project.prepareForcedAlignment.forcedAlignmentDir
         }
+        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab ) {
+            //dependsOn project.runForcedAlignment
+            tgDir = project.runForcedAlignment.destDir
+        }
     }
 }
