@@ -1,6 +1,8 @@
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.9.7'
 }
 
 group 'de.dfki.mary'
@@ -17,12 +19,51 @@ gradlePlugin {
 
 repositories {
     jcenter()
+    maven {
+        url 'https://oss.jfrog.org/artifactory/oss-snapshot-local'
+    }
 }
 
 dependencies {
+    runtime 'de.dfki.mary:marytts-voicebuilding:0.1'
+    runtime 'de.dfki.mary:marytts-lang-en:5.2'
     testCompile 'org.testng:testng:6.9.6'
+    compile 'org.m2ci.msp:jtgt:0.6-SNAPSHOT'
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            force 'org.codehaus.groovy:groovy-all:2.4.10'
+        }
+    }
 }
 
 test {
     useTestNG()
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourceJar {
+                classifier 'sources'
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://api.bintray.com/maven/marytts/marytts/$project.name"
+            credentials {
+                username = findProperty('bintrayUser')
+                password = findProperty('bintrayApiKey')
+            }
+        }
+    }
 }
