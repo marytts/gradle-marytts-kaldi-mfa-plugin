@@ -1,3 +1,5 @@
+package de.dfki.mary.voicebuilding
+
 import org.gradle.testkit.runner.GradleRunner
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.Test
