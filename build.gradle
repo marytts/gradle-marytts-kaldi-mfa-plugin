@@ -8,10 +8,12 @@ plugins {
 group 'de.dfki.mary'
 version '0.1-SNAPSHOT'
 
+ext.pluginId = 'marytts-kaldi-mfa'
+
 gradlePlugin {
     plugins {
         maryttsKaldiMfaPlugin {
-            id = 'marytts-kaldi-mfa'
+            id = pluginId
             implementationClass = 'de.dfki.mary.voicebuilding.MaryttsKaldiMfaPlugin'
         }
     }
@@ -64,6 +66,20 @@ publishing {
                 username = findProperty('bintrayUser')
                 password = findProperty('bintrayApiKey')
             }
+        }
+    }
+}
+
+pluginBundle {
+    website = 'http://mary.dfki.de'
+    vcsUrl = 'https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin'
+    description = project.description
+    tags = ['text-to-speech', 'kaldi', 'marytts', 'forced-alignment']
+
+    plugins {
+        pandocRevealPlugin {
+            id = pluginId
+            displayName = 'Gradle MaryTTS Kaldi MFA plugin'
         }
     }
 }
