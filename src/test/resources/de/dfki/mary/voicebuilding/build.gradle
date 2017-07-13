@@ -8,6 +8,12 @@ configurations {
 
 repositories {
     ivy {
+        url "http://dl.bintray.com/marytts/marytts"
+        layout 'pattern', {
+            artifact 'festvox-examples/[module]_[classifier]/[module].[ext]'
+        }
+    }
+    ivy {
         url 'http://festvox.org/examples'
         layout 'pattern', {
             artifact '[module]_[classifier]/packed/[module].[ext]'
