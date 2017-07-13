@@ -3,6 +3,7 @@ this plugin uses a [docker image](https://github.com/psibre/marytts-dockerfiles/
 
 ### prerequisites
 - this plugin requires [docker](https://www.docker.com)
+- we recommend using **Gradle 3.5** with **Groovy 2.4.10**[1] 
 - **yourproject/build/wav** (with your .wav-files) and **yourproject/build/text** (with your corresponding .txt-files) 
     - the .wav-files have to be downsampled to **16 kHz** (we recommend using [SoX](http://sox.sourceforge.net) for this)
 
@@ -70,3 +71,17 @@ finally run
 the resulting **TextGrids** will be in **build/TextGrid**
  
 
+
+[1] if you are using a version with **Groovy 2.4.7** or lower you have to change this
+```
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            force 'org.codehaus.groovy:groovy-all:2.4.10'
+        }
+    }
+}
+```
+in **build.gradle**.
+
+But really you can just use a 3.5 gradle wrapper.

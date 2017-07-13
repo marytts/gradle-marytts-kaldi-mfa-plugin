@@ -28,7 +28,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         dependencySubstitution {
-            force 'org.codehaus.groovy:groovy-all:2.4.7'
+            force 'org.codehaus.groovy:groovy-all:2.4.10'
         }
     }
 }
