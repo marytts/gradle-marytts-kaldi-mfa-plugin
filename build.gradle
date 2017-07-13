@@ -59,15 +59,6 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            url "https://api.bintray.com/maven/marytts/marytts/$project.name"
-            credentials {
-                username = findProperty('bintrayUser')
-                password = findProperty('bintrayApiKey')
-            }
-        }
-    }
 }
 
 pluginBundle {
