@@ -1,0 +1,51 @@
+plugins {
+    id 'marytts-kaldi-mfa'
+}
+
+configurations {
+    data
+}
+
+repositories {
+    ivy {
+        url 'http://festvox.org/examples'
+        layout 'pattern', {
+            artifact '[module]_[classifier]/packed/[module].[ext]'
+        }
+    }
+}
+
+dependencies {
+    // http://festvox.org/examples/cmu_time_awb_ldom/packed/cmu_time_awb.tar.bz2
+    data group: 'org.festvox', name: 'cmu_time_awb', version: '1.0', classifier: 'ldom', ext: 'tar.bz2'
+}
+
+task processDataDependencies(type: Copy) {
+    from configurations.data.collect {
+        tarTree(it)
+    }
+    into "$buildDir/unpacked"
+    include '**/*.wav', '**/*.lab', '**/etc/*.data'
+    includeEmptyDirs = false
+}
+
+task convertTextPrompts {
+    dependsOn processDataDependencies
+    def srcFile = file("$buildDir/unpacked/cmu_time_awb/etc/time.data")
+    inputs.file srcFile
+    ext.destDir = file('text')
+    outputs.dir destDir
+    doLast {
+        destDir.mkdirs()
+        srcFile.eachLine { line ->
+            def fields = line.split()
+            def prompt = fields[1]
+            def text = fields[2..-2].join(' ').replaceAll('"', '')
+            file("$destDir/${prompt}.txt").text = text
+        }
+    }
+}
+
+convertTextToMaryXml.dependsOn convertTextPrompts
+
+prepareForcedAlignment.wavDir = file("$buildDir/unpacked/cmu_time_awb/wav")
