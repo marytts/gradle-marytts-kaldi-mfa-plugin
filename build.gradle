@@ -1,14 +1,3 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
-    }
-
-    dependencies {
-        classpath group: 'org.m2ci.msp', name:'jtgt', version: '0.6-SNAPSHOT'
-    }
-}
-
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'
@@ -30,13 +19,16 @@ gradlePlugin {
 
 repositories {
     jcenter()
+    maven {
+        url 'https://oss.jfrog.org/artifactory/oss-snapshot-local'
+    }
 }
 
 dependencies {
     runtime 'de.dfki.mary:marytts-voicebuilding:0.1'
     runtime 'de.dfki.mary:marytts-lang-en:5.2'
     testCompile 'org.testng:testng:6.9.6'
-    compile 'org.m2ci.msp:jtgt:0.5'
+    compile 'org.m2ci.msp:jtgt:0.6-SNAPSHOT'
 
 }
 
