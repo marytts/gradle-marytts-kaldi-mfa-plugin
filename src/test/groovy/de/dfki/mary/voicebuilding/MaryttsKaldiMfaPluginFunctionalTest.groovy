@@ -36,4 +36,18 @@ class MaryttsKaldiMfaPluginFunctionalTest {
         def result = gradle.withArguments('convertTextToMaryXml').build()
         println result.output
     }
+
+    @Test
+    void testConvertTextGridToXLab() {
+        def textGridFile = new File("$gradle.projectDir/build/TextGrid/data", 'test.TextGrid')
+        textGridFile.parentFile.mkdirs()
+        textGridFile.withWriter {
+            it << this.class.getResourceAsStream('test.TextGrid')
+        }
+        def result = gradle.withArguments('convertTextGridToXLab').build()
+        println result.output
+        def expected = this.class.getResourceAsStream('expected.lab').text
+        def actual = new File("$gradle.projectDir/build/lab/test.lab").text
+        assert expected == actual
+    }
 }
