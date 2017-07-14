@@ -70,7 +70,22 @@ finally run
 ```
 the resulting **TextGrids** will be in **build/TextGrid**
  
+###Optional post-processing
+in order to use these TextGrids for voicebuilding with MaryTTS you have to replace *sil* in your TextGrids and convert them to .lab-files.
+This task depends on *runForcedAlignment* as the TextGrids are created there.
 
+If you used the default directories, this is done simply with:
+```
+./gradlew convertTextGridToXLab
+```
+Otherwise you want to override the default directory in your **build.gradle**:
+ ```
+ convertTextGridToXLab {
+     tgDir = file("$buildDir/yourTextGridDir")
+ }
+ ```
+
+#
 
 [1] if you are using a version with **Groovy 2.4.7** or lower you have to change this
 ```
