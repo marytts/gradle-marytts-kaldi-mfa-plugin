@@ -7,6 +7,7 @@ plugins {
 
 group 'de.dfki.mary'
 version '0.1-SNAPSHOT'
+description 'Forced alignment based on MaryTTS, Kaldi, MFA, and Docker'
 
 ext.pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
 
