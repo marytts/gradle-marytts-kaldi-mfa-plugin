@@ -11,25 +11,7 @@ this plugin uses a [docker image](https://github.com/psibre/marytts-dockerfiles/
 
 ## How to apply this plugin
 
-**initialize** this plugin as a submodule
-```
-git submodule add https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin.git buildSrc/gradle-marytts-kaldi-mfa-plugin
-```
-add this to **buildSrc/build.gradle**
-```
-repositories {
-    jcenter()
-}
-
-dependencies {
-    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
-    runtime project(':gradle-marytts-kaldi-mfa-plugin')
-}
-```
-add this to **buildSrc/settings.gradle**
-```
-include 'gradle-marytts-kaldi-mfa-plugin'
-```
+Follow the instructions on the [gradle plugin website](https://plugins.gradle.org/plugin/de.dfki.mary.voicebuilding.marytts-kaldi-mfa)
 
 ## How to configure your project
 add this to **gradle.properties**
