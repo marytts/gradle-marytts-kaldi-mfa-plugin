@@ -8,7 +8,7 @@ plugins {
 group 'de.dfki.mary'
 version '0.1-SNAPSHOT'
 
-ext.pluginId = 'marytts-kaldi-mfa'
+ext.pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
 
 gradlePlugin {
     plugins {
