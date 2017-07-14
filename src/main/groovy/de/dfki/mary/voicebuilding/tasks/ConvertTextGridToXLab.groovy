@@ -20,10 +20,12 @@ class ConvertTextGridToXLab extends DefaultTask {
         def xLabSer = new XWaveLabelSerializer()
         project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
-            //replace Strings (silence) that cannot be processed by MaryTTS
-//            tgString = tgString.replaceAll( "text = \"sil\"", "text = \"_\"")
-//            tgString = tgString.replaceAll( "text = \"\"", "text = \"_\"")
+
             def xlabStr = xLabSer.toString(tg, 'phones')
+            //replace Strings (silence) that cannot be processed by MaryTTS
+            xlabStr = xlabStr.replaceAll( "text = \"sil\"", "text = \"_\"")
+            xlabStr = xlabStr.replaceAll( "text = \"\"", "text = \"_\"")
+
             def xlabFile = project.file("$destDir/${tgFile.name - '.TextGrid' + '.lab'}")
             xlabFile.text = xlabStr
         }
