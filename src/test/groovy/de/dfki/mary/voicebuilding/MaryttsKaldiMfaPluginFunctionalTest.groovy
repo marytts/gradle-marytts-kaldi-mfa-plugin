@@ -15,14 +15,9 @@ class MaryttsKaldiMfaPluginFunctionalTest {
     void setup() {
         def projectDir = File.createTempDir()
         gradle = GradleRunner.create().withProjectDir(projectDir).withPluginClasspath()
-        new File(projectDir, 'build.gradle').withWriter { buildscript ->
-            buildscript.println 'plugins {'
-            buildscript.println "  id 'marytts-kaldi-mfa'"
-            buildscript.println '}'
+        new File(projectDir, 'build.gradle').withWriter {
+            it << this.class.getResourceAsStream('build.gradle')
         }
-        def textFile = new File("$projectDir/text/fnord.txt")
-        textFile.parentFile.mkdirs()
-        textFile.text = "Fnord."
     }
 
     @Test

@@ -44,6 +44,9 @@ configurations.all {
 
 test {
     useTestNG()
+    testLogging {
+        exceptionFormat = 'full'
+    }
 }
 
 task sourceJar(type: Jar) {
