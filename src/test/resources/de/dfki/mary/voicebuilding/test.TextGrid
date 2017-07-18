@@ -25,8 +25,16 @@ item []:
         name = "phones"
         xmin = 0.8297278911564626
         xmax = 2
-        intervals: size = 1
+        intervals: size = 3
         intervals [1]:
             xmin = 0.8297278911564626
             xmax = 2
             text = "test"
+        intervals [2]:
+            xmin = 0.8297278911564626
+            xmax = 2
+            text = "sil"
+        intervals [3]:
+            xmin = 0.8297278911564626
+            xmax = 2
+            text = ""
