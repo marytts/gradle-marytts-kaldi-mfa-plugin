@@ -5,6 +5,9 @@ import org.gradle.api.tasks.*
 
 import org.m2ci.msp.jtgt.io.TextGridSerializer
 import org.m2ci.msp.jtgt.io.XWaveLabelSerializer
+import org.m2ci.msp.jtgt.Tier
+import org.m2ci.msp.jtgt.TextGrid
+import org.m2ci.msp.jtgt.Annotation
 
 class ConvertTextGridToXLab extends DefaultTask {
 
@@ -20,14 +23,36 @@ class ConvertTextGridToXLab extends DefaultTask {
         def xLabSer = new XWaveLabelSerializer()
         project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
+            tg = replaceSilenceString(tg)
 
             def xlabStr = xLabSer.toString(tg, 'phones')
-            //replace Strings (silence) that cannot be processed by MaryTTS
-            xlabStr = xlabStr.replaceAll( "text = \"sil\"", "text = \"_\"")
-            xlabStr = xlabStr.replaceAll( "text = \"\"", "text = \"_\"")
 
             def xlabFile = project.file("$destDir/${tgFile.name - '.TextGrid' + '.lab'}")
             xlabFile.text = xlabStr
         }
+    }
+
+    TextGrid replaceSilenceString(TextGrid tg) {
+        ArrayList<Tier> tiers = tg.getTiers()
+        ArrayList<Tier> newTiers = new ArrayList<Tier>()
+        tg.setTiers(newTiers)
+        for (tier in tiers) {
+            if (tier.getName().equals("phones")) {
+                ArrayList<Annotation> anno = tier.getAnnotations()
+                ArrayList<Annotation> newAnno = new ArrayList<Annotation>()
+                tier.setAnnotations(newAnno)
+                for (a in anno) {
+                    if (a.getText().equals("sil") || a.getText().equals("")) {
+                        a.setText("_")
+                        tier.addAnnotation(a)
+                    }
+                    else {
+                        tier.addAnnotation(a)
+                    }
+                }
+            }
+            tg.addTier(tier)
+        }
+        return tg
     }
 }
