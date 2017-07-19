@@ -14,6 +14,9 @@ class ConvertTextGridToXLab extends DefaultTask {
     @InputDirectory
     File tgDir
 
+    @Input
+    Map<String, String> labelMapping = [sil: '_']
+
     @OutputDirectory
     File destDir = project.file("$project.buildDir/lab")
 
@@ -24,6 +27,9 @@ class ConvertTextGridToXLab extends DefaultTask {
         project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
             tg = replaceSilenceString(tg)
+            tg.tiers.find { it.name == 'phones' }.annotations.each {
+                it.text = labelMapping[it.text] ?: it.text
+            }
 
             def xlabStr = xLabSer.toString(tg, 'phones')
 
@@ -45,8 +51,7 @@ class ConvertTextGridToXLab extends DefaultTask {
                     if (a.getText().equals("sil") || a.getText().equals("")) {
                         a.setText("_")
                         tier.addAnnotation(a)
-                    }
-                    else {
+                    } else {
                         tier.addAnnotation(a)
                     }
                 }
