@@ -1,3 +1,5 @@
+package de.dfki.mary.voicebuilding.tasks
+
 import groovy.json.JsonBuilder
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.*
