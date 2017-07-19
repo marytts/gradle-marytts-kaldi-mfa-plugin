@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
+[![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=dev)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
 
 # gradle-marytts-kaldi-mfa-plugin
 this plugin uses a [docker image](https://github.com/psibre/marytts-dockerfiles/tree/master/kaldi-mfa) of the Kaldi-based [Montreal Forced Aligner](https://montrealcorpustools.github.io/Montreal-Forced-Aligner/)
