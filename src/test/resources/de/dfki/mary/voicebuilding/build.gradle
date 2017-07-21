@@ -54,6 +54,4 @@ task convertTextPrompts {
 
 convertTextToMaryXml.dependsOn convertTextPrompts
 
-convertTextGridToXLab.labelMapping = [sil: 'pau']
-
 prepareForcedAlignment.wavDir = file("$buildDir/unpacked/cmu_time_awb/wav")
