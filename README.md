@@ -62,10 +62,11 @@ If you used the default directories, this is done simply with:
 ```
 ./gradlew convertTextGridToXLab
 ```
-Otherwise you want to override the default directory in your **build.gradle**:
+Otherwise you want to override the default directory in your **build.gradle**. You can also **override the labelMapping**.  
  ```
  convertTextGridToXLab {
      tgDir = file("$buildDir/yourTextGridDir")
+     labelMapping = [sil: 'pau']
  }
  ```
 
