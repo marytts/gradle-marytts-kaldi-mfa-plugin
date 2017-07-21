@@ -24,9 +24,9 @@ add the following lines to your **build.gradle**
 ``` 
 plugins {
     id 'groovy'
-}
+    id "de.dfki.mary.voicebuilding.marytts-kaldi-mfa" version "0.2.0"
 
-apply plugin: 'marytts-kaldi-mfa'
+}
 
 convertTextToMaryXml {
     srcDir = file("$buildDir/text")
