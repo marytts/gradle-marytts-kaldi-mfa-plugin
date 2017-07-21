@@ -26,9 +26,11 @@ class ConvertTextGridToXLab extends DefaultTask {
         def xLabSer = new XWaveLabelSerializer()
         project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
-            tg = replaceSilenceString(tg)
             tg.tiers.find { it.name == 'phones' }.annotations.each {
                 it.text = labelMapping[it.text] ?: it.text
+                if (it.text == '' ){
+                    it.text = "_"
+                }
             }
 
             def xlabStr = xLabSer.toString(tg, 'phones')
@@ -38,26 +40,4 @@ class ConvertTextGridToXLab extends DefaultTask {
         }
     }
 
-    TextGrid replaceSilenceString(TextGrid tg) {
-        ArrayList<Tier> tiers = tg.getTiers()
-        ArrayList<Tier> newTiers = new ArrayList<Tier>()
-        tg.setTiers(newTiers)
-        for (tier in tiers) {
-            if (tier.getName().equals("phones")) {
-                ArrayList<Annotation> anno = tier.getAnnotations()
-                ArrayList<Annotation> newAnno = new ArrayList<Annotation>()
-                tier.setAnnotations(newAnno)
-                for (a in anno) {
-                    if (a.getText().equals("sil") || a.getText().equals("")) {
-                        a.setText("_")
-                        tier.addAnnotation(a)
-                    } else {
-                        tier.addAnnotation(a)
-                    }
-                }
-            }
-            tg.addTier(tier)
-        }
-        return tg
-    }
 }
