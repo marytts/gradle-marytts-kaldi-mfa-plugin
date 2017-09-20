@@ -39,7 +39,7 @@ task convertTextPrompts {
     dependsOn processDataDependencies
     def srcFile = file("$buildDir/unpacked/cmu_time_awb/etc/time.data")
     inputs.file srcFile
-    ext.destDir = file('text')
+    ext.destDir = file("$buildDir/text")
     outputs.dir destDir
     doLast {
         destDir.mkdirs()
