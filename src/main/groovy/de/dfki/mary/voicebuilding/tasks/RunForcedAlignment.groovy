@@ -17,18 +17,14 @@ class RunForcedAlignment extends DefaultTask {
     @TaskAction
     void run() {
         project.exec {
-            commandLine 'docker', 'run', '--rm',
-                    '--volume', "$modelDir:/models",
-                    '--volume', "$srcDir:/data",
-                    '--volume', "$temporaryDir:/temp",
-                    '--volume', "$destDir:/textGrids",
-                    '--tty', 'psibre/kaldi-mfa',
-                    '/mfa/dist/montreal-forced-aligner/bin/mfa_train_and_align',
-                    '--output_model_path', '/models',
-                    '--temp_directory', '/temp',
-                    '--num_jobs', project.gradle.startParameter.parallelProjectExecutionEnabled ? project.gradle.startParameter.maxWorkerCount : 1,
+            commandLine 'lib/train_and_align',
+                    '--output_model_path', modelDir,
+                    '--temp_directory', temporaryDir,
+                    '--num_jobs',
+                    project.gradle.startParameter.parallelProjectExecutionEnabled ? project.gradle.startParameter.maxWorkerCount : 1,
                     '--verbose',
-                    '/data', '/data/dict.txt', '/textGrids'
+                    srcDir, "$srcDir/dict.txt", destDir
+            workingDir "$project.buildDir/mfa/montreal-forced-aligner"
         }
     }
 }
