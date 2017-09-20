@@ -6,7 +6,7 @@ services:
 
 branches:
   only:
-    - dev
+    - master
 
 language: groovy
 jdk:
