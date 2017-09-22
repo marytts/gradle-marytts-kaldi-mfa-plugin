@@ -5,6 +5,7 @@ import de.undercouch.gradle.tasks.download.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
+import org.gradle.internal.os.OperatingSystem
 
 class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
@@ -27,13 +28,15 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             maryXmlDir = project.convertTextToMaryXml.destDir
         }
         project.task('downloadMFA', type: Download) {
-            src 'https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases/download/v1.0.0/montreal-forced-aligner_macosx.zip'
-            dest project.buildDir
+            ext.dep = getMFADependencyFor(OperatingSystem.current())
+            src dep.url
+            dest "$project.buildDir/$dep.name"
             overwrite false
         }
         project.task('unpackMFA', type: Copy) {
             dependsOn project.downloadMFA
-            from project.zipTree("$project.buildDir/montreal-forced-aligner_macosx.zip")
+            from OperatingSystem.current().isLinux() ? project.tarTree("$project.buildDir/mfa.tar.gz") :
+                    project.zipTree("$project.buildDir/mfa.zip")
             into "$project.buildDir/mfa"
         }
         project.task('runForcedAlignment', type: RunForcedAlignment) {
@@ -44,5 +47,32 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             dependsOn project.runForcedAlignment
             tgDir = project.runForcedAlignment.destDir
         }
+    }
+
+    Map getMFADependencyFor(OperatingSystem os) {
+        def group = 'ca.mcgill.linguistics'
+        def name = 'montreal-forced-aligner'
+        def version = '1.0.0'
+        def classifier
+        def ext = 'zip'
+        switch (os) {
+            case { it.isLinux() }:
+                classifier = 'linux'
+                ext = 'tar.gz'
+                break
+            case { it.isMacOsX() }:
+                classifier = 'macosx'
+                break
+            case { it.isWindows() && System.getenv("ProgramFiles(x86)") }:
+                classifier = 'win64'
+                break
+            default:
+                project.logger.error "Cannot determine native Montreal Forcer Aligner dependency for $os.name"
+                break
+        }
+        [
+                url : "https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases/download/v$version/${name}_${classifier}.$ext",
+                name: "mfa.$ext"
+        ]
     }
 }
