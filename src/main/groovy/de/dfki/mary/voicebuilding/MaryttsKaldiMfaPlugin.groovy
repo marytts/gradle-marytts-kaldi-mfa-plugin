@@ -69,7 +69,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                 break
             default:
                 project.logger.error "Cannot determine native Montreal Forcer Aligner dependency for $os.name"
-                break
+                return
         }
         [
                 url : "https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases/download/v$version/${name}_${classifier}.$ext",
