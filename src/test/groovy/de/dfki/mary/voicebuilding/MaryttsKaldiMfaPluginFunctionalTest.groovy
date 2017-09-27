@@ -6,7 +6,6 @@ import org.testng.annotations.*
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
-@Test
 class MaryttsKaldiMfaPluginFunctionalTest {
 
     GradleRunner gradle
