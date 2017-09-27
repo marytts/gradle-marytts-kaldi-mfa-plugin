@@ -28,7 +28,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             maryXmlDir = project.convertTextToMaryXml.destDir
         }
         project.task('downloadMFA', type: Download) {
-            ext.dep = getMFADependencyFor(OperatingSystem.current())
+            ext.dep = getMFADependencyFor(project)
             src dep.url
             dest "$project.buildDir/$dep.name"
             overwrite false
@@ -49,7 +49,8 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
     }
 
-    Map getMFADependencyFor(OperatingSystem os) {
+    Map getMFADependencyFor(Project project) {
+        def os = OperatingSystem.current()
         def group = 'ca.mcgill.linguistics'
         def name = 'montreal-forced-aligner'
         def version = '1.0.0'
