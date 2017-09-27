@@ -24,12 +24,7 @@ class ConvertTextGridToXLab extends DefaultTask {
     void convert() {
         def tgSer = new TextGridSerializer()
         def xLabSer = new XWaveLabelSerializer()
-        project.copy {
-            from "$tgDir/data"
-            into temporaryDir
-        }
-        project.ant.fixcrlf srcDir: temporaryDir, includes: '*.TextGrid', eol: 'lf'
-        project.fileTree(temporaryDir).include('*.TextGrid').collect { tgFile ->
+        project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
             tg.tiers.find { it.name == 'phones' }.annotations.each {
                 it.text = labelMapping[it.text] ?: it.text
