@@ -1,8 +1,8 @@
 package de.dfki.mary.voicebuilding
 
 import org.gradle.testkit.runner.GradleRunner
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.Test
+import org.m2ci.msp.jtgt.io.XWaveLabelSerializer
+import org.testng.annotations.*
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
@@ -41,8 +41,10 @@ class MaryttsKaldiMfaPluginFunctionalTest {
         }
         def result = gradle.withArguments('convertTextGridToXLab').build()
         println result.output
-        def expected = this.class.getResourceAsStream('expected.lab').text
-        def actual = new File("$gradle.projectDir/build/lab/test.lab").text
+        def expectedStr = this.class.getResourceAsStream('expected.lab').text
+        def expected = new XWaveLabelSerializer().fromString(expectedStr)
+        def actualStr = new File("$gradle.projectDir/build/lab/test.lab").text
+        def actual = new XWaveLabelSerializer().fromString(actualStr)
         assert expected == actual
     }
 }
