@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'de.dfki.mary'
-version '0.2.0'
+version '0.2.0-SNAPSHOT'
 description 'Forced alignment based on MaryTTS, Kaldi, MFA, and Docker'
 
 ext.pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
@@ -22,15 +22,14 @@ gradlePlugin {
 
 repositories {
     jcenter()
-
 }
 
 dependencies {
+    compile 'de.undercouch:gradle-download-task:3.3.0'
+    compile 'org.m2ci.msp:jtgt:0.5.2'
     runtime 'de.dfki.mary:marytts-voicebuilding:0.1'
     runtime 'de.dfki.mary:marytts-lang-en:5.2'
     testCompile 'org.testng:testng:6.9.6'
-    compile 'org.m2ci.msp:jtgt:0.5.1'
-
 }
 
 configurations.all {

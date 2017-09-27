@@ -1,8 +1,5 @@
 dist: trusty
-sudo: required
-
-services:
-  - docker
+sudo: false
 
 branches:
   only:
@@ -11,6 +8,11 @@ branches:
 language: groovy
 jdk:
   - oraclejdk8
+
+addons:
+  apt:
+    packages:
+      - libatlas3-base
 
 script: ./gradlew check --info
 
