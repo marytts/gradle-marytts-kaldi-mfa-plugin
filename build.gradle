@@ -22,18 +22,14 @@ gradlePlugin {
 
 repositories {
     jcenter()
-    maven {
-        url 'https://oss.jfrog.org/artifactory/oss-snapshot-local'
-    }
 }
 
 dependencies {
     compile 'de.undercouch:gradle-download-task:3.3.0'
+    compile 'org.m2ci.msp:jtgt:0.5.2'
     runtime 'de.dfki.mary:marytts-voicebuilding:0.1'
     runtime 'de.dfki.mary:marytts-lang-en:5.2'
     testCompile 'org.testng:testng:6.9.6'
-    compile 'org.m2ci.msp:jtgt:0.6-SNAPSHOT'
-
 }
 
 configurations.all {
