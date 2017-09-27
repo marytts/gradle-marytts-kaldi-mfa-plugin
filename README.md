@@ -69,19 +69,3 @@ Otherwise you want to override the default directory in your **build.gradle**. Y
      labelMapping = [sil: 'pau']
  }
  ```
-
-#
-
-[1] if you are using a version with **Groovy 2.4.7** or lower you have to change this
-```
-configurations.all {
-    resolutionStrategy {
-        dependencySubstitution {
-            force 'org.codehaus.groovy:groovy-all:2.4.10'
-        }
-    }
-}
-```
-in **build.gradle**.
-
-But really you can just use a 3.5 gradle wrapper.
