@@ -10,6 +10,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 - updated the documentation
 - added labelMapping
 - adding missing package name
+- generalized paths in groovy task
+- no requirement for docker anymore
+    - we use the binaries from [MFA](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases) directly now
+- check for OS to see which binary to download
 
 [v0.1.0] (2017-07-14)
 ---------------------

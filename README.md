@@ -1,12 +1,11 @@
-[![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=dev)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
+[![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
 
 # gradle-marytts-kaldi-mfa-plugin
-this plugin uses a [docker image](https://github.com/psibre/marytts-dockerfiles/tree/master/kaldi-mfa) of the Kaldi-based [Montreal Forced Aligner](https://montrealcorpustools.github.io/Montreal-Forced-Aligner/)
+this plugin uses the newest [release](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases) of the Kaldi-based [Montreal Forced Aligner](https://montrealcorpustools.github.io/Montreal-Forced-Aligner/)
 
 ### prerequisites
-- this plugin requires [docker](https://www.docker.com)
-- we recommend using **Gradle 3.5** with **Groovy 2.4.10**[1] 
-- **yourproject/build/wav** (with your .wav-files) and **yourproject/build/text** (with your corresponding .txt-files) 
+- we recommend using **Gradle 3.5** with **Groovy 2.4.10**[1]
+- **yourproject/build/wav** (with your .wav-files) and **yourproject/build/text** (with your corresponding .txt-files)
     - the .wav-files have to be downsampled to **16 kHz** (we recommend using [SoX](http://sox.sourceforge.net) for this)
 
 ## How to apply this plugin
@@ -21,20 +20,12 @@ version=0.5.0-SNAPSHOT
 ```
 
 add the following lines to your **build.gradle**
-``` 
+```
 plugins {
     id 'groovy'
     id "de.dfki.mary.voicebuilding.marytts-kaldi-mfa" version "0.2.0"
-
 }
 
-convertTextToMaryXml {
-    srcDir = file("$buildDir/text")
-}
-
-runForcedAlignment {
-    dependsOn convertTextToMaryXml, prepareForcedAlignment
-}
  ```
  - per default your **srcDir** is set to  **yourproject/text**
  - you can override your default-directories for the tasks in your **build.gradle**
@@ -42,19 +33,19 @@ runForcedAlignment {
  convertTextToMaryXml {
      srcDir = file("$buildDir/text")
  }
- 
+
  prepareForcedAlignment {
      wavDir =  file("$buildDir/wav")
  }
  ```
- 
-finally run 
+
+finally run
 ```
 ./gradlew runForcedAlignment
 ```
 the resulting **TextGrids** will be in **build/TextGrid**
- 
-###Optional post-processing
+
+### Optional post-processing
 in order to use these TextGrids for voicebuilding with MaryTTS you have to replace *sil* in your TextGrids and convert them to .lab-files.
 This task depends on *runForcedAlignment* as the TextGrids are created there.
 
