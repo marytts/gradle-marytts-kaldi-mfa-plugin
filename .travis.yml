@@ -9,6 +9,11 @@ language: groovy
 jdk:
   - oraclejdk8
 
+addons:
+  apt:
+    packages:
+      - libatlas3-base
+
 script: ./gradlew check --info
 
 before_cache:
