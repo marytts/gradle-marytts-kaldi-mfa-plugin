@@ -3,14 +3,14 @@
 # gradle-marytts-kaldi-mfa-plugin
 this plugin uses the newest [release](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases) of the Kaldi-based [Montreal Forced Aligner](https://montrealcorpustools.github.io/Montreal-Forced-Aligner/)
 
-:::info
+#
 If you are on a linux system you have to install a library which is missing in the linux-release from [MFA](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases).
 We hope that this bug is fixed in a future version. Until now you can resolve this by installing this library via:
 
 ```
 sudo apt-get install libatlas3-base
 ```
-:::
+#
 
 ### prerequisites
 - we recommend using **Gradle 3.5** with **Groovy 2.4.10**[1]
