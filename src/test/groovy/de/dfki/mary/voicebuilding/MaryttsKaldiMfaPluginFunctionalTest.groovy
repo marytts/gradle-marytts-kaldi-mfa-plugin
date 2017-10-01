@@ -33,7 +33,7 @@ class MaryttsKaldiMfaPluginFunctionalTest {
 
     @Test
     void testConvertTextGridToXLab() {
-        def textGridFile = new File("$gradle.projectDir/build/TextGrid/data", 'test.TextGrid')
+        def textGridFile = new File("$gradle.projectDir/build/TextGrid/forcedAlignment", 'test.TextGrid')
         textGridFile.parentFile.mkdirs()
         textGridFile.withWriter {
             it << this.class.getResourceAsStream('test.TextGrid')

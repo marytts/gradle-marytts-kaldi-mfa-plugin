@@ -24,7 +24,7 @@ class ConvertTextGridToXLab extends DefaultTask {
     void convert() {
         def tgSer = new TextGridSerializer()
         def xLabSer = new XWaveLabelSerializer()
-        project.fileTree("$tgDir/data").include('*.TextGrid').collect { tgFile ->
+        project.fileTree("$tgDir/forcedAlignment").include('*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
             tg.tiers.find { it.name == 'phones' }.annotations.each {
                 it.text = labelMapping[it.text] ?: it.text
