@@ -15,7 +15,7 @@ class ConvertTextGridToXLab extends DefaultTask {
     File tgDir
 
     @Input
-    Map<String, String> labelMapping = [sil: '_']
+    Map<String, String> labelMapping = [sil: '_', sp: '_']
 
     @OutputDirectory
     File destDir = project.file("$project.buildDir/lab")
