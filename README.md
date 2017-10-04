@@ -1,71 +1,83 @@
 [![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
 
 # gradle-marytts-kaldi-mfa-plugin
-this plugin uses the newest [release](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases) of the Kaldi-based [Montreal Forced Aligner](https://montrealcorpustools.github.io/Montreal-Forced-Aligner/)
 
-#
-If you are on a linux system you have to install a library which is missing in the linux-release from [MFA](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases).
-We hope that this bug is fixed in a future version. Until now you can resolve this by installing this library via:
+This plugin uses the [Kaldi]-based [Montreal Forced Aligner] to phonetically segment audio data based on corresponding text files.
+It uses [MaryTTS] to predict the text pronunciation.
+
+## Prerequisites
+
+In your project directory, place the audio and text files under your `build` directory like this:
+```
+build
+├── text
+│   ├── utt0001.txt
+│   ├── utt0002.txt
+│   ├── utt0003.txt
+│   ├── utt0004.txt
+│   └── utt0005.txt
+└── wav
+    ├── utt0001.wav
+    ├── utt0002.wav
+    ├── utt0003.wav
+    ├── utt0004.wav
+    └── utt0005.wav
+```
+The `wav` files have to be downsampled to **16 kHz** (we recommend using [SoX] for this).
+
+### Linux note
+
+If you are on a linux system, ensure that the `libcblas.so.3` file is on the library search path, since it is not bundled with the Linux release of [Montreal Forced Aligner].
+For details, see the [installation notes](http://montreal-forced-aligner.readthedocs.io/en/latest/installation.html#linux).
+
+We hope that this issue is resolved in a future release; until then you can install the missing library by running
 
 ```
 sudo apt-get install libatlas3-base
 ```
-#
-
-### prerequisites
-- we recommend using **Gradle 3.5** with **Groovy 2.4.10**[1]
-- **yourproject/build/wav** (with your .wav-files) and **yourproject/build/text** (with your corresponding .txt-files)
-    - the .wav-files have to be downsampled to **16 kHz** (we recommend using [SoX](http://sox.sourceforge.net) for this)
+on Debian-based distributions (such as Ubuntu).
 
 ## How to apply this plugin
 
-Follow the instructions on the [gradle plugin website](https://plugins.gradle.org/plugin/de.dfki.mary.voicebuilding.marytts-kaldi-mfa)
+Please see the instructions at <https://plugins.gradle.org/plugin/de.dfki.mary.voicebuilding.marytts-kaldi-mfa>
 
 ## How to configure your project
-add this to **gradle.properties**
-```
-group=de.dfki.mary
-version=0.5.0-SNAPSHOT
-```
 
-add the following lines to your **build.gradle**
-```
-plugins {
-    id 'groovy'
-    id "de.dfki.mary.voicebuilding.marytts-kaldi-mfa" version "0.2.0"
+To customize the directories configured as input for the forced alignment, you can override them like this in the project's `build.gradle`:
+
+```groovy
+convertTextToMaryXml {
+    srcDir = file("some/other/text/directory")
 }
+prepareForcedAlignment {
+    wavDir =  file("$buildDir/wav")
+}
+```
 
- ```
- - per default your **srcDir** is set to  **yourproject/text**
- - you can override your default-directories for the tasks in your **build.gradle**
- ```
- convertTextToMaryXml {
-     srcDir = file("$buildDir/text")
- }
+## How to run the forced alignement
 
- prepareForcedAlignment {
-     wavDir =  file("$buildDir/wav")
- }
- ```
-
-finally run
+Run
 ```
 ./gradlew runForcedAlignment
 ```
-the resulting **TextGrids** will be in **build/TextGrid**
+after which the resulting TextGrid files will be under `build/TextGrid`.
 
 ### Optional post-processing
-in order to use these TextGrids for voicebuilding with MaryTTS you have to replace *sil* in your TextGrids and convert them to .lab-files.
-This task depends on *runForcedAlignment* as the TextGrids are created there.
 
-If you used the default directories, this is done simply with:
+In order to use the TextGrids for voicebuilding with [MaryTTS] you have to replace the `sil` and `sp` labels with `_` and convert them to `lab` files in Xwaves format.
+
+This can be done simply by running
 ```
 ./gradlew convertTextGridToXLab
 ```
-Otherwise you want to override the default directory in your **build.gradle**. You can also **override the labelMapping**.  
- ```
- convertTextGridToXLab {
-     tgDir = file("$buildDir/yourTextGridDir")
-     labelMapping = [sil: 'pau']
- }
- ```
+Note that you can also *override* the label mapping:
+```groovy
+convertTextGridToXLab {
+    labelMapping = [sil: 'pau', a: 'ah'] // etc.
+}
+```
+
+[Kaldi]: http://kaldi-asr.org/
+[MaryTTS]: http://mary.dfki.de/
+[Montreal Forced Aligner]: https://montrealcorpustools.github.io/Montreal-Forced-Aligner/
+[SoX]: http://sox.sourceforge.net/
