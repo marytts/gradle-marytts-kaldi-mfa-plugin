@@ -7,9 +7,12 @@ plugins {
 
 group 'de.dfki.mary'
 version '0.2.0-SNAPSHOT'
-description 'Forced alignment based on MaryTTS, Kaldi, MFA, and Docker'
+description 'Forced alignment based on MaryTTS, Kaldi, and MFA'
 
-ext.pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
+ext {
+    pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
+    pluginUrl = 'https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin'
+}
 
 gradlePlugin {
     plugins {
@@ -59,13 +62,13 @@ publishing {
 }
 
 pluginBundle {
-    website = 'http://mary.dfki.de'
-    vcsUrl = 'https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin'
+    website = pluginUrl
+    vcsUrl = pluginUrl
     description = project.description
     tags = ['text-to-speech', 'kaldi', 'marytts', 'forced-alignment']
 
     plugins {
-        pandocRevealPlugin {
+        maryttsKaldiMfaPlugin {
             id = pluginId
             displayName = 'Gradle MaryTTS Kaldi MFA plugin'
         }
