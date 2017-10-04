@@ -5,6 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.*
 
 class ConvertTextToMaryXML extends DefaultTask {
+
     @InputDirectory
     File srcDir = project.file("$project.buildDir/text")
 

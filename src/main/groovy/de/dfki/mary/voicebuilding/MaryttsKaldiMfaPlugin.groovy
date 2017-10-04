@@ -2,8 +2,7 @@ package de.dfki.mary.voicebuilding
 
 import de.dfki.mary.voicebuilding.tasks.*
 import de.undercouch.gradle.tasks.download.*
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.*
 import org.gradle.api.tasks.Copy
 import org.gradle.internal.os.OperatingSystem
 
@@ -11,38 +10,48 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+
         project.pluginManager.apply DownloadTaskPlugin
+
         project.configurations {
             marytts
         }
+
         project.repositories {
             jcenter()
         }
+
         project.dependencies {
             marytts 'de.dfki.mary:marytts-voicebuilding:0.1'
             marytts 'de.dfki.mary:marytts-lang-en:5.2'
         }
+
         project.task('convertTextToMaryXml', type: ConvertTextToMaryXML)
+
         project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
             dependsOn project.convertTextToMaryXml
             maryXmlDir = project.convertTextToMaryXml.destDir
         }
+
         project.task('downloadMFA', type: Download) {
             ext.dep = getMFADependencyFor(project)
             src dep.url
             dest "$project.buildDir/$dep.name"
             overwrite false
         }
+
         project.task('unpackMFA', type: Copy) {
             dependsOn project.downloadMFA
             from OperatingSystem.current().isLinux() ? project.tarTree("$project.buildDir/mfa.tar.gz") :
                     project.zipTree("$project.buildDir/mfa.zip")
             into "$project.buildDir/mfa"
         }
+
         project.task('runForcedAlignment', type: RunForcedAlignment) {
             dependsOn project.prepareForcedAlignment, project.unpackMFA
             srcDir = project.prepareForcedAlignment.forcedAlignmentDir
         }
+
         project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
             dependsOn project.runForcedAlignment
             tgDir = project.runForcedAlignment.destDir
