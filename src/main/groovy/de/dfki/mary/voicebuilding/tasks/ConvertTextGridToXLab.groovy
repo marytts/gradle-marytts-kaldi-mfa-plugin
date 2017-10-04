@@ -1,13 +1,9 @@
 package de.dfki.mary.voicebuilding.tasks
 
-import org.gradle.api.*
+import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.*
 
-import org.m2ci.msp.jtgt.io.TextGridSerializer
-import org.m2ci.msp.jtgt.io.XWaveLabelSerializer
-import org.m2ci.msp.jtgt.Tier
-import org.m2ci.msp.jtgt.TextGrid
-import org.m2ci.msp.jtgt.Annotation
+import org.m2ci.msp.jtgt.io.*
 
 class ConvertTextGridToXLab extends DefaultTask {
 
@@ -28,7 +24,7 @@ class ConvertTextGridToXLab extends DefaultTask {
             def tg = tgSer.fromString(tgFile.text)
             tg.tiers.find { it.name == 'phones' }.annotations.each {
                 it.text = labelMapping[it.text] ?: it.text
-                if (it.text == '' ){
+                if (it.text == '') {
                     it.text = "_"
                 }
             }

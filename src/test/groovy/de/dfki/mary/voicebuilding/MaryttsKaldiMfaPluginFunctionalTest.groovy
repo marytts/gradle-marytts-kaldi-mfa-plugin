@@ -4,8 +4,6 @@ import org.gradle.testkit.runner.GradleRunner
 import org.m2ci.msp.jtgt.io.XWaveLabelSerializer
 import org.testng.annotations.*
 
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
-
 class MaryttsKaldiMfaPluginFunctionalTest {
 
     GradleRunner gradle
