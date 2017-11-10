@@ -5,7 +5,9 @@ Gradle MaryTTS Kaldi MFA Plugin
 ------------
 
 ### Changes
-
+- updated jtgt to v5.3
+- removed dependency in `convertTextGridToXlab.groovy`
+    - this task can now also be used for other TextGrids
 - updated jtgt to stable release
 - updated the documentation
 - added `labelMapping`
