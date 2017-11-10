@@ -78,6 +78,12 @@ convertTextGridToXLab {
 }
 ```
 
+#### Using *convertTextGridToXLab* alone
+If you want to use `convertTextGridToXLab` alone you may want to override the default TextGrid-directory which is `build/TextGrid/forcedAlignment`:
+```
+convertTextGridToXLab.tgDir = file("$buildDir/TextGrid")
+```
+
 [Kaldi]: http://kaldi-asr.org/
 [MaryTTS]: http://mary.dfki.de/
 [Montreal Forced Aligner]: https://montrealcorpustools.github.io/Montreal-Forced-Aligner/
