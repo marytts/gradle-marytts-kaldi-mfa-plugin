@@ -30,11 +30,14 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             mfa getMFADependencyFor(project)
         }
 
-        project.task('convertTextToMaryXml', type: ConvertTextToMaryXML)
+        project.task('convertTextToMaryXml', type: ConvertTextToMaryXML) {
+            srcDir = project.layout.buildDirectory.dir('text')
+            destDir = project.layout.buildDirectory.dir('maryxml')
+        }
 
         project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
-            dependsOn project.convertTextToMaryXml
             maryXmlDir = project.convertTextToMaryXml.destDir
+            forcedAlignmentDir = project.layout.buildDirectory.dir('forcedAlignment')
         }
 
         project.task('unpackMFA', type: Copy) {
@@ -57,11 +60,16 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('runForcedAlignment', type: RunForcedAlignment) {
-            dependsOn project.prepareForcedAlignment, project.unpackMFA
+            dependsOn project.unpackMFA
             srcDir = project.prepareForcedAlignment.forcedAlignmentDir
+            modelDir = project.layout.buildDirectory.dir('kaldiModels')
+            destDir = project.layout.buildDirectory.dir('TextGrid')
         }
 
-        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab)
+        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
+            srcDir = project.runForcedAlignment.destDir
+            destDir = project.layout.buildDirectory.dir('lab')
+        }
     }
 
     Map getMFADependencyFor(Project project) {

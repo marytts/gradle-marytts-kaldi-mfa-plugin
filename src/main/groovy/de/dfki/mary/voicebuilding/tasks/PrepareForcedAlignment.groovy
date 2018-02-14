@@ -1,18 +1,19 @@
 package de.dfki.mary.voicebuilding.tasks
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
 
 class PrepareForcedAlignment extends DefaultTask {
 
     @InputDirectory
-    File maryXmlDir
+    final DirectoryProperty maryXmlDir = newInputDirectory()
 
     @InputDirectory
-    File wavDir = project.file("$project.buildDir/wav")
+    final DirectoryProperty wavDir = newInputDirectory()
 
     @OutputDirectory
-    File forcedAlignmentDir = project.file("$project.buildDir/forcedAlignment")
+    final DirectoryProperty forcedAlignmentDir = newOutputDirectory()
 
     @TaskAction
     void prepare() {
@@ -30,7 +31,7 @@ class PrepareForcedAlignment extends DefaultTask {
                         tokens << token.text()
                     }
                 }
-                project.file("$forcedAlignmentDir/${xmlFile.name - '.xml' + '.lab'}").withWriter('UTF-8') { out ->
+                forcedAlignmentDir.file(xmlFile.name - '.xml' + '.lab').get().asFile.withWriter('UTF-8') { out ->
                     out.println tokens.join(' ')
                 }
             } catch (all) {
@@ -38,7 +39,7 @@ class PrepareForcedAlignment extends DefaultTask {
                 broken << xmlFile.name - '.xml'
             }
         }
-        project.file("$forcedAlignmentDir/dict.txt").withWriter('UTF-8') { out ->
+        forcedAlignmentDir.file('dict.txt').get().asFile.withWriter('UTF-8') { out ->
             dict.toSorted { it.key.toLowerCase() }.each { word, phonemes ->
                 out.println "$word $phonemes"
             }

@@ -2,20 +2,21 @@ package de.dfki.mary.voicebuilding.tasks
 
 import groovy.json.JsonBuilder
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
 
 class ConvertTextToMaryXML extends DefaultTask {
 
     @InputDirectory
-    File srcDir = project.file("$project.buildDir/text")
+    final DirectoryProperty srcDir = newInputDirectory()
 
     @OutputDirectory
-    File destDir = project.file("$project.buildDir/maryxml")
+    final DirectoryProperty destDir = newOutputDirectory()
 
     @TaskAction
     void convert() {
         def requests = project.fileTree(srcDir).include('*.txt').collect { txtFile ->
-            def xmlFile = project.file("$destDir/${txtFile.name - '.txt' + '.xml'}")
+            def xmlFile = destDir.file(txtFile.name - '.txt' + '.xml').get().asFile
             [locale          : 'en_US',
              inputType       : 'TEXT',
              inputFile       : txtFile.path,
