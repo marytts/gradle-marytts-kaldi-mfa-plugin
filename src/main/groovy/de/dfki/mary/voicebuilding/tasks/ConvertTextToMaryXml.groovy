@@ -5,7 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
 
-class ConvertTextToMaryXML extends DefaultTask {
+class ConvertTextToMaryXml extends DefaultTask {
 
     @InputDirectory
     final DirectoryProperty srcDir = newInputDirectory()
