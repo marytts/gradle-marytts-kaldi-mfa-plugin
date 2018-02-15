@@ -2,6 +2,7 @@ package de.dfki.mary.voicebuilding.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 
 import org.m2ci.msp.jtgt.io.*
@@ -12,10 +13,10 @@ class ConvertTextGridToXLab extends DefaultTask {
     final DirectoryProperty srcDir = newInputDirectory()
 
     @Input
-    Map<String, String> labelMapping = [sil: '_', sp: '_']
+    final Property<Map> labelMapping = project.objects.property(Map)
 
     @Input
-    String tiername = "phones"
+    final Property<String> tiername = project.objects.property(String)
 
     @OutputDirectory
     final DirectoryProperty destDir = newOutputDirectory()
@@ -26,14 +27,14 @@ class ConvertTextGridToXLab extends DefaultTask {
         def xLabSer = new XWaveLabelSerializer()
         project.fileTree(srcDir).include('**/*.TextGrid').collect { tgFile ->
             def tg = tgSer.fromString(tgFile.text)
-            tg.tiers.find { it.name == tiername }.annotations.each {
-                it.text = labelMapping[it.text] ?: it.text
+            tg.tiers.find { it.name == tiername.get() }.annotations.each {
+                it.text = labelMapping.get()[it.text] ?: it.text
                 if (it.text == '') {
                     it.text = "_"
                 }
             }
 
-            def xlabStr = xLabSer.toString(tg, tiername)
+            def xlabStr = xLabSer.toString(tg, tiername.get())
 
             def xlabFile = destDir.file(tgFile.name - '.TextGrid' + '.lab').get().asFile
             xlabFile.text = xlabStr

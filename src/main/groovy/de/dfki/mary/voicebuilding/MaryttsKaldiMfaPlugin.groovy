@@ -68,6 +68,8 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
         project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
             srcDir = project.runForcedAlignment.destDir
+            tiername = 'phones'
+            labelMapping = [sil: '_', sp: '_']
             destDir = project.layout.buildDirectory.dir('lab')
         }
     }
