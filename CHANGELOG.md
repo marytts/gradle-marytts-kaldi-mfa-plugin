@@ -9,6 +9,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 - build with Gradle v4.5.1
 - upgrade some dependencies
 - download (and cache) MFA as dependency
+- use Gradle Provider API to manage task configuration and dependencies
 
 [v0.2.0] (2017-11-10)
 ---------------------
