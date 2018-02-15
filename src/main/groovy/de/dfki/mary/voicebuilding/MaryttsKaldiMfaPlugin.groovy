@@ -1,7 +1,6 @@
 package de.dfki.mary.voicebuilding
 
 import de.dfki.mary.voicebuilding.tasks.*
-import de.undercouch.gradle.tasks.download.*
 import org.gradle.api.*
 import org.gradle.api.tasks.Copy
 import org.gradle.internal.os.OperatingSystem
@@ -12,8 +11,6 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-
-        project.pluginManager.apply DownloadTaskPlugin
 
         project.configurations {
             marytts
