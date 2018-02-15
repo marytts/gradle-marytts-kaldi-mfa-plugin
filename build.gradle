@@ -28,7 +28,6 @@ repositories {
 }
 
 dependencies {
-    compile group: 'de.undercouch', name: 'gradle-download-task', version: '3.3.0'
     compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.5.3'
     runtime group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
         exclude group: '*', module: 'groovy-all'
