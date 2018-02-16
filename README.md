@@ -1,7 +1,7 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
 
-# gradle-marytts-kaldi-mfa-plugin
+# Gradle MaryTTS Kaldi MFA plugin
 
 This plugin uses the [Kaldi]-based [Montreal Forced Aligner] to phonetically segment audio data based on corresponding text files.
 It uses [MaryTTS] to predict the text pronunciation.
@@ -9,6 +9,7 @@ It uses [MaryTTS] to predict the text pronunciation.
 ## Prerequisites
 
 In your project directory, place the audio and text files under your `build` directory like this:
+
 ```
 build
 ├── text
@@ -24,19 +25,21 @@ build
     ├── utt0004.wav
     └── utt0005.wav
 ```
-The `wav` files have to be downsampled to **16 kHz** (we recommend using [SoX] for this).
 
 ### Linux note
 
-If you are on a linux system, ensure that the `libcblas.so.3` file is on the library search path, since it is not bundled with the Linux release of [Montreal Forced Aligner].
+If you are on a Linux system, ensure that the `libcblas.so.3` file is on the library search path, since it is not bundled with the Linux release of [Montreal Forced Aligner].
 For details, see the [installation notes](http://montreal-forced-aligner.readthedocs.io/en/latest/installation.html#linux).
 
 We hope that this issue is resolved in a future release; until then you can install the missing library by running
-
 ```
 sudo apt-get install libatlas3-base
 ```
 on Debian-based distributions (such as Ubuntu).
+
+### Windows note
+
+On Windows, an installation of Visual Studio is required.
 
 ## How to apply this plugin
 
@@ -50,8 +53,10 @@ To customize the directories configured as input for the forced alignment, you c
 convertTextToMaryXml {
     srcDir = file("some/other/text/directory")
 }
+
 prepareForcedAlignment {
     wavDir =  file("$buildDir/wav")
+    dictFile = file("someDict.txt")
 }
 ```
 
@@ -78,7 +83,8 @@ convertTextGridToXLab {
 }
 ```
 
-#### Using *convertTextGridToXLab* alone
+### Using *convertTextGridToXLab* alone
+
 If you want to use `convertTextGridToXLab` alone you may want to override the default TextGrid-directory which is `build/TextGrid/forcedAlignment`:
 ```
 convertTextGridToXLab.tgDir = file("$buildDir/TextGrid")

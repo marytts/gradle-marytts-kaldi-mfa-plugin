@@ -1,19 +1,20 @@
 package de.dfki.mary.voicebuilding.tasks
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
 import org.gradle.internal.os.OperatingSystem
 
 class RunForcedAlignment extends DefaultTask {
 
     @InputDirectory
-    File srcDir
+    final DirectoryProperty srcDir = newInputDirectory()
 
     @OutputDirectory
-    File modelDir = project.file("$project.buildDir/kaldiModels")
+    final DirectoryProperty modelDir = newOutputDirectory()
 
     @OutputDirectory
-    File destDir = project.file("$project.buildDir/TextGrid")
+    final DirectoryProperty destDir = newOutputDirectory()
 
     @TaskAction
     void run() {
@@ -22,12 +23,12 @@ class RunForcedAlignment extends DefaultTask {
                     ['cmd', '/c', 'bin\\mfa_train_and_align.exe'] :
                     ['lib/train_and_align']
             commandLine += [
-                    '--output_model_path', modelDir,
+                    '--output_model_path', modelDir.get().asFile,
                     '--temp_directory', temporaryDir,
                     '--num_jobs',
                     project.gradle.startParameter.parallelProjectExecutionEnabled ? project.gradle.startParameter.maxWorkerCount : 1,
                     '--verbose',
-                    srcDir, "$srcDir/dict.txt", destDir
+                    srcDir.get().asFile, srcDir.file('dict.txt').get().asFile, destDir.get().asFile
             ]
             workingDir "$project.buildDir/mfa/montreal-forced-aligner"
         }

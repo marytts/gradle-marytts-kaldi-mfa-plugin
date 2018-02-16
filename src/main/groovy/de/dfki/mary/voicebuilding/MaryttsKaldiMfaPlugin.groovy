@@ -30,11 +30,26 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             mfa getMFADependencyFor(project)
         }
 
-        project.task('convertTextToMaryXml', type: ConvertTextToMaryXML)
+        project.task('convertTextToMaryXml', type: ConvertTextToMaryXml) {
+            srcDir = project.layout.buildDirectory.dir('text')
+            destDir = project.layout.buildDirectory.dir('maryxml')
+        }
+
+        project.task('convertMaryXmlToMfaLab', type: ConvertMaryXmlToMfaLab) {
+            srcDir = project.convertTextToMaryXml.destDir
+            destDir = project.layout.buildDirectory.dir('mfaLab')
+        }
+
+        project.task('generateDictionaryFromMaryXml', type: GenerateDictionaryFromMaryXml) {
+            srcDir = project.convertTextToMaryXml.destDir
+            destFile = project.layout.buildDirectory.file('dict.txt')
+        }
 
         project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
-            dependsOn project.convertTextToMaryXml
-            maryXmlDir = project.convertTextToMaryXml.destDir
+            wavDir = project.layout.buildDirectory.dir('wav')
+            mfaLabDir = project.convertMaryXmlToMfaLab.destDir
+            dictFile = project.generateDictionaryFromMaryXml.destFile
+            destDir = project.layout.buildDirectory.dir('forcedAlignment')
         }
 
         project.task('unpackMFA', type: Copy) {
@@ -57,11 +72,18 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('runForcedAlignment', type: RunForcedAlignment) {
-            dependsOn project.prepareForcedAlignment, project.unpackMFA
-            srcDir = project.prepareForcedAlignment.forcedAlignmentDir
+            dependsOn project.unpackMFA
+            srcDir = project.prepareForcedAlignment.destDir
+            modelDir = project.layout.buildDirectory.dir('kaldiModels')
+            destDir = project.layout.buildDirectory.dir('TextGrid')
         }
 
-        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab)
+        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
+            srcDir = project.runForcedAlignment.destDir
+            tiername = 'phones'
+            labelMapping = [sil: '_', sp: '_']
+            destDir = project.layout.buildDirectory.dir('lab')
+        }
     }
 
     Map getMFADependencyFor(Project project) {
