@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'de.dfki.mary'
-version '0.3.0'
+version '0.4.0-SNAPSHOT'
 description 'Forced alignment based on MaryTTS, Kaldi, and MFA'
 
 ext {
