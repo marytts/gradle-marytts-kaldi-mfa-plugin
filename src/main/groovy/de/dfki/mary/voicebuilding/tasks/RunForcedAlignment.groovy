@@ -26,7 +26,7 @@ class RunForcedAlignment extends DefaultTask {
                     '--output_model_path', modelDir.get().asFile,
                     '--temp_directory', temporaryDir,
                     '--num_jobs',
-                    project.gradle.startParameter.parallelProjectExecutionEnabled ? project.gradle.startParameter.maxWorkerCount : 1,
+                    project.gradle.startParameter.maxWorkerCount,
                     '--verbose',
                     srcDir.get().asFile, srcDir.file('dict.txt').get().asFile, destDir.get().asFile
             ]
