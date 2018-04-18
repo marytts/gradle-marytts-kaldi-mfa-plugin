@@ -35,7 +35,7 @@ dependencies {
     runtime group: 'de.dfki.mary', name: 'marytts-lang-en', version: '5.2', {
         exclude group: '*', module: 'groovy-all'
     }
-    testCompile group: 'org.testng', name: 'testng', version: '6.14.2'
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
 }
 
 test {
