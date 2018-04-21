@@ -4,6 +4,14 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+## Changes
+
+- merge tasks for MaryXML processing; input text and custom dictionary are now generated from a single task, `processMaryXml`
+
+## Fixed
+
+- strip trailing dots (e.g., from abbreviations) from tokens; previously, these caused `<unk>` words in the aligned words, and missing segments
+
 [v0.3.1] (2018-04-18)
 ---------------------
 
