@@ -25,12 +25,16 @@ class ProcessMaryXml extends DefaultTask {
                 def tokens = []
                 new XmlSlurper().parse(xmlFile).depthFirst().findAll { it.name() == 't' }.each { token ->
                     def word = token.text()
-                    tokens << word
-                    def phonemes = token.'**'.findAll { it.name() == 'syllable' }.collect { syllable ->
-                        syllable.ph.collect { it.@p }
-                    }.flatten().join(' ')
-                    if (phonemes) {
-                        dict[word] = phonemes
+                    // strip trailing dots
+                    word = word.replaceAll(/\.+$/, '')
+                    if (word) {
+                        tokens << word
+                        def phonemes = token.'**'.findAll { it.name() == 'syllable' }.collect { syllable ->
+                            syllable.ph.collect { it.@p }
+                        }.flatten().join(' ')
+                        if (phonemes) {
+                            dict[word] = phonemes
+                        }
                     }
                 }
                 destDir.file(xmlFile.name - '.xml' + '.lab').get().asFile.withWriter('UTF-8') { out ->
