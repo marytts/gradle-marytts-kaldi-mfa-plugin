@@ -35,20 +35,16 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             destDir = project.layout.buildDirectory.dir('maryxml')
         }
 
-        project.task('convertMaryXmlToMfaLab', type: ConvertMaryXmlToMfaLab) {
+        project.task('processMaryXml', type: ProcessMaryXml) {
             srcDir = project.convertTextToMaryXml.destDir
             destDir = project.layout.buildDirectory.dir('mfaLab')
-        }
-
-        project.task('generateDictionaryFromMaryXml', type: GenerateDictionaryFromMaryXml) {
-            srcDir = project.convertTextToMaryXml.destDir
-            destFile = project.layout.buildDirectory.file('dict.txt')
+            dictFile = project.layout.buildDirectory.file('dict.txt')
         }
 
         project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
             wavDir = project.layout.buildDirectory.dir('wav')
-            mfaLabDir = project.convertMaryXmlToMfaLab.destDir
-            dictFile = project.generateDictionaryFromMaryXml.destFile
+            mfaLabDir = project.processMaryXml.destDir
+            dictFile = project.processMaryXml.dictFile
             destDir = project.layout.buildDirectory.dir('forcedAlignment')
         }
 
