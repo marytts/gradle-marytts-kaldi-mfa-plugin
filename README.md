@@ -48,8 +48,51 @@ How to apply this plugin
 
 Please see the instructions at <https://plugins.gradle.org/plugin/de.dfki.mary.voicebuilding.marytts-kaldi-mfa>
 
-How to configure your project
------------------------------
+MFA Tasks
+---------
+
+Applying this plugin to a project adds several tasks, which are configured as follows.
+
+### `convertTextToMaryXml` - Converts text files to MaryXML for pronunciation prediction (G2P)
+#### Inputs
+- `srcDir`, default: `layout.buildDirectory.dir('text')`
+#### Outputs
+- `destDir`, default: `layout.buildDirectory.dir('maryxml')`
+
+### `processMaryXml` - Extracts text input files from MaryXML and generates custom dictionary for MFA
+#### Inputs
+- `srcDir`, default: `convertTextToMaryXml.destDir`
+#### Outputs
+- `destDir`, default: `layout.buildDirectory.dir('mfaLab')`
+- `dictFile`, default: `layout.buildDirectory.file('dict.txt')`
+
+### `prepareForcedAlignment` - Collects audio and text input files and custom dictionary for MFA
+#### Inputs
+- `wavDir`, default: `layout.buildDirectory.dir('wav')`
+- `mfaLabDir`, default: `processMaryXml.destDir`
+- `dictFile`, default: `processMaryXml.dictFile`
+#### Outputs
+- `destDir`, default: `layout.buildDirectory.dir('forcedAlignment')`
+
+### `unpackMFA` - Downloads and unpacks MFA
+#### Outputs
+- `destinationDir`, default: `layout.buildDirectory.dir('mfa')`
+
+### `runForcedAlignment` - Runs MFA to generate Praat TextGrids
+#### Inputs
+- `unpackMFA`
+- `srcDir`, default: `prepareForcedAlignment.destDir`
+#### Outputs
+- `modelDir`, default: `layout.buildDirectory.dir('kaldiModels')`
+- `destDir`, default: `layout.buildDirectory.dir('TextGrid')`
+
+### `convertTextGridToXLab` - Converts Praat TextGrids to XWaves lab format (with label mapping)
+#### Inputs
+- `srcDir`, default: `runForcedAlignment.destDir`
+- `tierName`, default: `'phones'`
+- `labelMapping`, default: `[sil: '_', sp: '_']`
+#### Outputs
+- `destDir`, default: `layout.buildDirectory.dir('lab')`
 
 To customize the directories configured as input for the forced alignment, you can override them like this in the project's `build.gradle`:
 
