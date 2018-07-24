@@ -1,12 +1,14 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
 
-# Gradle MaryTTS Kaldi MFA plugin
+Gradle MaryTTS Kaldi MFA plugin
+===============================
 
 This plugin uses the [Kaldi]-based [Montreal Forced Aligner] to phonetically segment audio data based on corresponding text files.
 It uses [MaryTTS] to predict the text pronunciation.
 
-## Prerequisites
+Prerequisites
+-------------
 
 In your project directory, place the audio and text files under your `build` directory like this:
 
@@ -41,11 +43,13 @@ on Debian-based distributions (such as Ubuntu).
 
 On Windows, an installation of Visual Studio is required.
 
-## How to apply this plugin
+How to apply this plugin
+------------------------
 
 Please see the instructions at <https://plugins.gradle.org/plugin/de.dfki.mary.voicebuilding.marytts-kaldi-mfa>
 
-## How to configure your project
+How to configure your project
+-----------------------------
 
 To customize the directories configured as input for the forced alignment, you can override them like this in the project's `build.gradle`:
 
@@ -60,7 +64,8 @@ prepareForcedAlignment {
 }
 ```
 
-## How to run the forced alignement
+How to run the forced alignement
+--------------------------------
 
 Run
 ```
