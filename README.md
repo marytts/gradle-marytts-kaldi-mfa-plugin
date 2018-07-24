@@ -53,20 +53,23 @@ MFA Tasks
 
 Applying this plugin to a project adds several tasks, which are configured as follows.
 
-### `convertTextToMaryXml` - Converts text files to MaryXML for pronunciation prediction (G2P)
+### `convertTextToMaryXml`
+Converts text files to MaryXML for pronunciation prediction (G2P)
 #### Inputs
 - `srcDir`, default: `layout.buildDirectory.dir('text')`
 #### Outputs
 - `destDir`, default: `layout.buildDirectory.dir('maryxml')`
 
-### `processMaryXml` - Extracts text input files from MaryXML and generates custom dictionary for MFA
+### `processMaryXml`
+Extracts text input files from MaryXML and generates custom dictionary for MFA
 #### Inputs
 - `srcDir`, default: `convertTextToMaryXml.destDir`
 #### Outputs
 - `destDir`, default: `layout.buildDirectory.dir('mfaLab')`
 - `dictFile`, default: `layout.buildDirectory.file('dict.txt')`
 
-### `prepareForcedAlignment` - Collects audio and text input files and custom dictionary for MFA
+### `prepareForcedAlignment`
+Collects audio and text input files and custom dictionary for MFA
 #### Inputs
 - `wavDir`, default: `layout.buildDirectory.dir('wav')`
 - `mfaLabDir`, default: `processMaryXml.destDir`
@@ -74,11 +77,13 @@ Applying this plugin to a project adds several tasks, which are configured as fo
 #### Outputs
 - `destDir`, default: `layout.buildDirectory.dir('forcedAlignment')`
 
-### `unpackMFA` - Downloads and unpacks MFA
+### `unpackMFA`
+Downloads and unpacks MFA
 #### Outputs
 - `destinationDir`, default: `layout.buildDirectory.dir('mfa')`
 
-### `runForcedAlignment` - Runs MFA to generate Praat TextGrids
+### `runForcedAlignment`
+Runs MFA to generate Praat TextGrids
 #### Inputs
 - `unpackMFA`
 - `srcDir`, default: `prepareForcedAlignment.destDir`
@@ -86,7 +91,8 @@ Applying this plugin to a project adds several tasks, which are configured as fo
 - `modelDir`, default: `layout.buildDirectory.dir('kaldiModels')`
 - `destDir`, default: `layout.buildDirectory.dir('TextGrid')`
 
-### `convertTextGridToXLab` - Converts Praat TextGrids to XWaves lab format (with label mapping)
+### `convertTextGridToXLab`
+Converts Praat TextGrids to XWaves lab format (with label mapping)
 #### Inputs
 - `srcDir`, default: `runForcedAlignment.destDir`
 - `tierName`, default: `'phones'`
