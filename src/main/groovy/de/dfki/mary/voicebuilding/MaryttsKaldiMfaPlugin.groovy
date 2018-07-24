@@ -31,17 +31,20 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('convertTextToMaryXml', type: ConvertTextToMaryXml) {
+            group = 'MFA'
             srcDir = project.layout.buildDirectory.dir('text')
             destDir = project.layout.buildDirectory.dir('maryxml')
         }
 
         project.task('processMaryXml', type: ProcessMaryXml) {
+            group = 'MFA'
             srcDir = project.convertTextToMaryXml.destDir
             destDir = project.layout.buildDirectory.dir('mfaLab')
             dictFile = project.layout.buildDirectory.file('dict.txt')
         }
 
         project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
+            group = 'MFA'
             wavDir = project.layout.buildDirectory.dir('wav')
             mfaLabDir = project.processMaryXml.destDir
             dictFile = project.processMaryXml.dictFile
@@ -49,6 +52,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('unpackMFA', type: Copy) {
+            group = 'MFA'
             from project.configurations.mfa
             into "$project.buildDir/mfa"
             filesMatching '*.zip', { zipFileDetails ->
@@ -68,6 +72,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('runForcedAlignment', type: RunForcedAlignment) {
+            group = 'MFA'
             dependsOn project.unpackMFA
             srcDir = project.prepareForcedAlignment.destDir
             modelDir = project.layout.buildDirectory.dir('kaldiModels')
@@ -75,6 +80,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
+            group = 'MFA'
             srcDir = project.runForcedAlignment.destDir
             tiername = 'phones'
             labelMapping = [sil: '_', sp: '_']
