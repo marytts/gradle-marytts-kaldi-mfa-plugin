@@ -4,12 +4,18 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+## Changed
+
+- improve documentation
+- [all changes since v0.3.2]
+
 [v0.3.2] (2018-04-22)
 ---------------------
 
-## Changes
+## Changed
 
 - merge tasks for MaryXML processing; input text and custom dictionary are now generated from a single task, `processMaryXml`
+- [all changes since v0.3.1]
 
 ## Fixed
 
@@ -18,25 +24,27 @@ Gradle MaryTTS Kaldi MFA Plugin
 [v0.3.1] (2018-04-18)
 ---------------------
 
-### Changes
+### Changed
 
 - build with Gradle v4.7
 - always run MFA multi-threaded; no need to add `--parallel` option
+- [all changes since v0.3.0]
 
 [v0.3.0] (2018-02-16)
 ---------------------
 
-### Changes
+### Changed
 
 - build with Gradle v4.5.1
 - upgrade some dependencies
 - download (and cache) MFA as dependency
 - use Gradle Provider API to manage task configuration and dependencies
+- [all changes since v0.2.0]
 
 [v0.2.0] (2017-11-10)
 ---------------------
 
-### Changes
+### Changed
 
 - updated jtgt to v5.3
 - removed dependency in `convertTextGridToXlab.groovy`
@@ -49,6 +57,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 - no requirement for Docker anymore
     - we directly use the binaries from MFA v1.0.0 now
     - check for OS to see which binary to download
+- [all changes since v0.1.0]
 
 [v0.1.0] (2017-07-14)
 ---------------------
@@ -57,9 +66,14 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 - Forced Alignment based on a [Kaldi MFA Docker image](https://hub.docker.com/r/psibre/kaldi-mfa/)
 
-[Unreleased]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.2...HEAD
-[v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.1...v0.3.2
-[v0.3.1]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.0...v0.3.1
-[v0.3.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.2.0...v0.3.0
-[v0.2.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.1.0...v0.2.0
+[Unreleased]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/tree/master
+[all changes since v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.2...HEAD
+[v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.2
+[all changes since v0.3.1]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.1...v0.3.2
+[v0.3.1]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.1
+[all changes since v0.3.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.0...v0.3.1
+[v0.3.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.0
+[all changes since v0.2.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.2.0...v0.3.0
+[v0.2.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.2.0
+[all changes since v0.1.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.1.0
