@@ -29,7 +29,7 @@ build
 ### Linux note
 
 If you are on a Linux system, ensure that the `libcblas.so.3` file is on the library search path, since it is not bundled with the Linux release of [Montreal Forced Aligner].
-For details, see the [installation notes](http://montreal-forced-aligner.readthedocs.io/en/latest/installation.html#linux).
+For details, see the [installation notes](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/blob/3f548a89c03cabe0c778649d4799b2d3ff1db42f/docs/source/installation.rst#linux).
 
 We hope that this issue is resolved in a future release; until then you can install the missing library by running
 ```
