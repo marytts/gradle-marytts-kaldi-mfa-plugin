@@ -6,6 +6,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ## Changed
 
+- improve documentation
 - [all changes since v0.3.2]
 
 [v0.3.2] (2018-04-22)
