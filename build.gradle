@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.5.3'
+    compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.6.1'
     runtime group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
         exclude group: '*', module: 'groovy-all'
     }
