@@ -2,22 +2,17 @@ plugins {
     id 'java-gradle-plugin'
     id 'groovy'
     id 'maven-publish'
-    id 'com.gradle.plugin-publish' version '0.9.10'
+    id 'com.gradle.plugin-publish' version '0.10.0'
 }
 
 group 'de.dfki.mary'
 version '0.4-SNAPSHOT'
 description 'Forced alignment based on MaryTTS, Kaldi, and MFA'
 
-ext {
-    pluginId = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
-    pluginUrl = 'https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin'
-}
-
 gradlePlugin {
     plugins {
         maryttsKaldiMfaPlugin {
-            id = pluginId
+            id = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
             implementationClass = 'de.dfki.mary.voicebuilding.MaryttsKaldiMfaPlugin'
         }
     }
@@ -28,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.5.3'
+    compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.6.1'
     runtime group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
         exclude group: '*', module: 'groovy-all'
     }
@@ -61,6 +56,7 @@ publishing {
 }
 
 pluginBundle {
+    def pluginUrl = 'https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin'
     website = pluginUrl
     vcsUrl = pluginUrl
     description = project.description
@@ -68,7 +64,6 @@ pluginBundle {
 
     plugins {
         maryttsKaldiMfaPlugin {
-            id = pluginId
             displayName = 'Gradle MaryTTS Kaldi MFA plugin'
         }
     }
