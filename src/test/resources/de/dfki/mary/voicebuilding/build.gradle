@@ -41,24 +41,15 @@ task processDataDependencies(type: Copy) {
     includeEmptyDirs = false
 }
 
-task convertTextPrompts {
+task convertTextPrompts(type: ConvertTextPrompts) {
     dependsOn processDataDependencies
-    def srcFile = file("$buildDir/unpacked/cmu_time_awb/etc/time.data")
-    inputs.file srcFile
-    ext.destDir = file("$buildDir/text")
-    outputs.dir destDir
-    doLast {
-        destDir.mkdirs()
-        srcFile.eachLine { line ->
-            def fields = line.split()
-            def prompt = fields[1]
-            def text = fields[2..-2].join(' ').replaceAll('"', '')
-            file("$destDir/${prompt}.txt").text = text
-        }
-    }
+    srcFile = file("$buildDir/unpacked/cmu_time_awb/etc/time.data")
+    destDir = file("$buildDir/text")
 }
 
-convertTextToMaryXml.dependsOn convertTextPrompts
+convertTextToMaryXml {
+    srcDir = convertTextPrompts.destDir
+}
 
 task testConvertTextToMaryXml {
     dependsOn convertTextToMaryXml
@@ -111,5 +102,24 @@ task testConvertTextGridToXLab {
     dependsOn convertTextGridToXLab
     doLast {
         assert fileTree("$buildDir/lab").include('*.lab').files
+    }
+}
+
+class ConvertTextPrompts extends DefaultTask {
+
+    @InputFile
+    final RegularFileProperty srcFile = newInputFile()
+
+    @OutputDirectory
+    final DirectoryProperty destDir = newOutputDirectory()
+
+    @TaskAction
+    void convert() {
+        srcFile.get().asFile.eachLine { line ->
+            def fields = line.split()
+            def prompt = fields[1]
+            def text = fields[2..-2].join(' ').replaceAll('"', '')
+            destDir.file("${prompt}.txt").get().asFile.text = text
+        }
     }
 }
