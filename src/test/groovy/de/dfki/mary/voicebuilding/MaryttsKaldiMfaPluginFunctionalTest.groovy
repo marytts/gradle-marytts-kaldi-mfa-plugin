@@ -27,10 +27,10 @@ class MaryttsKaldiMfaPluginFunctionalTest {
         [
                 ['help', false],
                 ['testPlugin', false],
+                ['unpackMFA', true],
                 ['convertTextToMaryXml', true],
                 ['processMaryXml', true],
                 ['prepareForcedAlignment', true],
-                ['unpackMFA', true],
                 ['runForcedAlignment', true],
                 ['convertTextGridToXLab', true]
         ]
