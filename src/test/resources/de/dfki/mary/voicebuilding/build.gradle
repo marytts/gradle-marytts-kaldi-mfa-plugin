@@ -10,7 +10,7 @@ repositories {
     ivy {
         url "http://dl.bintray.com/marytts/marytts"
         layout 'pattern', {
-            artifact 'festvox-examples/[module]_[classifier]/[module].[ext]'
+            artifact '[organisation]/[module]/[module].[ext]'
         }
     }
     ivy {
