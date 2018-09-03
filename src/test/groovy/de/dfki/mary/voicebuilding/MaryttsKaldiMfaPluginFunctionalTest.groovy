@@ -15,7 +15,7 @@ class MaryttsKaldiMfaPluginFunctionalTest {
     @BeforeSuite
     void setup() {
         def projectDir = File.createTempDir()
-        gradle = GradleRunner.create().withProjectDir(projectDir).withPluginClasspath()
+        gradle = GradleRunner.create().withProjectDir(projectDir).withPluginClasspath().forwardOutput()
         new File(projectDir, 'build.gradle').withWriter {
             it << this.class.getResourceAsStream('build.gradle')
         }
@@ -38,13 +38,11 @@ class MaryttsKaldiMfaPluginFunctionalTest {
 
     @Test(dataProvider = 'taskNames')
     void testTasks(String taskName, boolean runTestTask) {
-        def result = gradle.withArguments('--info', taskName).build()
-        println result.output
+        def result = gradle.withArguments(taskName).build()
         assert result.task(":$taskName").outcome in [SUCCESS, UP_TO_DATE]
         if (runTestTask) {
             def testTaskName = 'test' + taskName.capitalize()
-            result = gradle.withArguments('--info', testTaskName).build()
-            println result.output
+            result = gradle.withArguments(testTaskName).build()
             assert result.task(":$taskName").outcome == UP_TO_DATE
             assert result.task(":$testTaskName").outcome == SUCCESS
         }
