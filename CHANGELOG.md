@@ -10,6 +10,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 - improve documentation
 - [all changes since v0.3.2]
 
+## Added
+
+- CI testing on Mac OSX
+
 [v0.3.2] (2018-04-22)
 ---------------------
 
