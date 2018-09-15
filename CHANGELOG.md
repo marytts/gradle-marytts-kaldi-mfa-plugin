@@ -4,25 +4,29 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
-## Changed
+### Added
+
+- CI testing on Mac OSX
+
+### Changed
 
 - build with Gradle v4.10
 - improve documentation
 - [all changes since v0.3.2]
 
-## Added
+### Fixed
 
-- CI testing on Mac OSX
+- trim potential whitespace from XML text nodes when generating dictionary
 
 [v0.3.2] (2018-04-22)
 ---------------------
 
-## Changed
+### Changed
 
 - merge tasks for MaryXML processing; input text and custom dictionary are now generated from a single task, `processMaryXml`
 - [all changes since v0.3.1]
 
-## Fixed
+### Fixed
 
 - strip trailing dots (e.g., from abbreviations) from tokens; previously, these caused `<unk>` words in the aligned words, and missing segments
 
