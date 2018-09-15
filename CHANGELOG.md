@@ -4,6 +4,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+### Changed
+
+- [all changes since v0.3.3]
+
 [v0.3.3] (2018-09-15)
 ---------------------
 
