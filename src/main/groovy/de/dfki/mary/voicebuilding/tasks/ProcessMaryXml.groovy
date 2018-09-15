@@ -24,7 +24,7 @@ class ProcessMaryXml extends DefaultTask {
             try {
                 def tokens = []
                 new XmlSlurper().parse(xmlFile).depthFirst().findAll { it.name() == 't' }.each { token ->
-                    def word = token.text()
+                    def word = token.text().trim()
                     // strip trailing dots
                     word = word.replaceAll(/\.+$/, '')
                     if (word) {
