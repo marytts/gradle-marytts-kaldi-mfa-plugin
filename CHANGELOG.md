@@ -81,7 +81,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/tree/master
 [all changes since v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.3...HEAD
 [v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.3
-[all changes since v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.2...HEAD
+[all changes since v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.2
 [all changes since v0.3.1]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.1
