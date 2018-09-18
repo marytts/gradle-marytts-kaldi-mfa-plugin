@@ -69,6 +69,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                     eachFile {
                         it.path = it.path.replaceAll(~/montreal-forced-aligner-release-assets-$mfaVersion-(macosx|linux|win64)/, 'montreal-forced-aligner')
                     }
+                    includeEmptyDirs = false
                 }
                 zipFileDetails.exclude()
             }
@@ -79,6 +80,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                     eachFile {
                         it.path = it.path.replaceAll(~/montreal-forced-aligner-release-assets-$mfaVersion-(macosx|linux|win64)/, 'montreal-forced-aligner')
                     }
+                    includeEmptyDirs = false
                 }
                 tarFileDetails.exclude()
             }
