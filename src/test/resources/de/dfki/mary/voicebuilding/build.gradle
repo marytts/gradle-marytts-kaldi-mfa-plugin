@@ -83,7 +83,7 @@ task testUnpackMFA {
     dependsOn unpackMFA
     doLast {
         def binaryPath = org.gradle.internal.os.OperatingSystem.current().isWindows() ? 'bin/mfa_train_and_align.exe' : 'lib/train_and_align'
-        assert file("$buildDir/mfa/montreal-forced-aligner/$binaryPath").canExecute()
+        assert file("$buildDir/mfa/$binaryPath").canExecute()
     }
 }
 
