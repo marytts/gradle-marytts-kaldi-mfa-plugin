@@ -30,7 +30,7 @@ class RunForcedAlignment extends DefaultTask {
                     '--verbose',
                     srcDir.get().asFile, srcDir.file('dict.txt').get().asFile, destDir.get().asFile
             ]
-            workingDir "$project.buildDir/mfa/montreal-forced-aligner"
+            workingDir "$project.buildDir/mfa"
         }
     }
 }
