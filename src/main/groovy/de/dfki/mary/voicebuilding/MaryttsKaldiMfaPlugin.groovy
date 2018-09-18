@@ -20,7 +20,10 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         project.repositories {
             jcenter()
             ivy {
-                url "https://cdn.rawgit.com/marytts/montreal-forced-aligner-release-assets/$mfaVersion"
+                url 'https://github.com/marytts/montreal-forced-aligner-release-assets/archive'
+                layout 'pattern', {
+                    artifact '[revision]-[classifier].[ext]'
+                }
             }
         }
 
@@ -63,6 +66,9 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                 project.copy {
                     from project.zipTree(zipFileDetails.file)
                     into destinationDir
+                    eachFile {
+                        it.path = it.path.replaceAll(~/montreal-forced-aligner-release-assets-$mfaVersion-(macosx|linux|win64)/, 'montreal-forced-aligner')
+                    }
                 }
                 zipFileDetails.exclude()
             }
@@ -70,6 +76,9 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                 project.copy {
                     from project.tarTree(tarFileDetails.file)
                     into destinationDir
+                    eachFile {
+                        it.path = it.path.replaceAll(~/montreal-forced-aligner-release-assets-$mfaVersion-(macosx|linux|win64)/, 'montreal-forced-aligner')
+                    }
                 }
                 tarFileDetails.exclude()
             }
