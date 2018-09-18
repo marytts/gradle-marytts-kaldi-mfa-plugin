@@ -90,7 +90,7 @@ task testUnpackMFA {
 task testRunForcedAlignment {
     dependsOn runForcedAlignment
     doLast {
-        assert fileTree("$buildDir/TextGrid/forcedAlignment").include('*.TextGrid').files
+        assert fileTree("$buildDir/TextGrid").include('*.TextGrid').files
     }
 }
 
