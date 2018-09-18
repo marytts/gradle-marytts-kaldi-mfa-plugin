@@ -6,6 +6,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ### Changed
 
+- CI testing on multiple Mac OSX versions (10.10-10.13)
 - [all changes since v0.3.4]
 
 [v0.3.4] (2018-09-18)
