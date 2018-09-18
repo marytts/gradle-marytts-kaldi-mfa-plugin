@@ -19,7 +19,7 @@ matrix:
 addons:
   apt:
     packages:
-    - libatlas3-base
+    - libstdc++6
 
 script: ./gradlew check --info
 
