@@ -1,6 +1,13 @@
 Gradle MaryTTS Kaldi MFA Plugin
 ===============================
 
+[Unreleased]
+------------
+
+### Changed
+
+- [all changes since v0.3.4]
+
 [v0.3.4] (2018-09-18)
 ---------------------
 
@@ -86,6 +93,8 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 - Forced Alignment based on a [Kaldi MFA Docker image](https://hub.docker.com/r/psibre/kaldi-mfa/)
 
+[Unreleased]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/tree/master
+[all changes since v0.3.4]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.4...HEAD
 [v0.3.4]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.4
 [all changes since v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.3...HEAD
 [v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.3
