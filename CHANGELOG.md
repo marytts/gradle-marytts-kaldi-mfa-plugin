@@ -8,6 +8,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 - resolve MFA from source archive, not Ivy repo
 - unpack MFA directly under `build/mfa`
+- convert to lower case for utterance tokens, generated dictionary
 - [all changes since v0.3.3]
 
 [v0.3.3] (2018-09-15)
