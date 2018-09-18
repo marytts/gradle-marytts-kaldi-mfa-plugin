@@ -25,8 +25,8 @@ class ProcessMaryXml extends DefaultTask {
                 def tokens = []
                 new XmlSlurper().parse(xmlFile).depthFirst().findAll { it.name() == 't' }.each { token ->
                     def word = token.text().trim()
-                    // strip trailing dots
-                    word = word.replaceAll(/\.+$/, '')
+                    // strip trailing dots, convert to lower case
+                    word = word.replaceAll(/\.+$/, '').toLowerCase()
                     if (word) {
                         tokens << word
                         def phonemes = token.'**'.findAll { it.name() == 'syllable' }.collect { syllable ->
