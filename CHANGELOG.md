@@ -6,6 +6,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ### Changed
 
+- resolve MFA from source archive, not Ivy repo
 - [all changes since v0.3.3]
 
 [v0.3.3] (2018-09-15)
