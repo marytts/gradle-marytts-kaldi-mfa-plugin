@@ -83,10 +83,17 @@ Downloads and unpacks MFA
 - `destinationDir`, default: `layout.buildDirectory.dir('mfa')`
 
 ### `runForcedAlignment`
-Runs MFA to generate Praat TextGrids
+Runs MFA to generate Praat TextGrids (for details on some properties, see the [CLI documentation])
 #### Inputs
 - `unpackMFA`
 - `srcDir`, default: `prepareForcedAlignment.destDir`
+- `speakerChars`, default: `0`
+- `fast`, defalt: `false`
+- `numJobs`, default: `gradle.startParameter.maxWorkerCount`
+- `noDict`, default: `false`
+- `clean`, default: `false`
+- `debug`, default: `false`
+- `ignoreExceptions`, default: `false`
 #### Outputs
 - `modelDir`, default: `layout.buildDirectory.dir('kaldiModels')`
 - `destDir`, default: `layout.buildDirectory.dir('TextGrid')`
@@ -144,6 +151,7 @@ If you want to use `convertTextGridToXLab` alone you may want to override the de
 convertTextGridToXLab.tgDir = file("$buildDir/TextGrid")
 ```
 
+[CLI documentation]: https://montreal-forced-aligner.readthedocs.io/en/v1.0.0/aligning.html#common-options-for-both-aligner-executables
 [Kaldi]: http://kaldi-asr.org/
 [MaryTTS]: http://mary.dfki.de/
 [Montreal Forced Aligner]: https://montrealcorpustools.github.io/Montreal-Forced-Aligner/

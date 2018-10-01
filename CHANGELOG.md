@@ -4,6 +4,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+### Added
+
+- exposed MFA command line options as wrapper task properties
+
 ### Changed
 
 - CI testing on multiple Mac OSX versions (10.10-10.13)

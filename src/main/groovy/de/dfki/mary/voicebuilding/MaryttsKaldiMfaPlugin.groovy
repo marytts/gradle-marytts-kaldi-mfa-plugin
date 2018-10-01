@@ -93,6 +93,13 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             srcDir = project.prepareForcedAlignment.destDir
             modelDir = project.layout.buildDirectory.dir('kaldiModels')
             destDir = project.layout.buildDirectory.dir('TextGrid')
+            speakerChars = 0
+            fast = false
+            numJobs = project.gradle.startParameter.maxWorkerCount
+            noDict = false
+            clean = false
+            debug = false
+            ignoreExceptions = false
         }
 
         project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
