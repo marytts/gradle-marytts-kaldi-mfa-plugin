@@ -1,8 +1,8 @@
 Gradle MaryTTS Kaldi MFA Plugin
 ===============================
 
-[Unreleased]
-------------
+[v0.3.5] (2018-10-01)
+---------------------
 
 ### Added
 
@@ -98,10 +98,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 - Forced Alignment based on a [Kaldi MFA Docker image](https://hub.docker.com/r/psibre/kaldi-mfa/)
 
-[Unreleased]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/tree/master
-[all changes since v0.3.4]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.4...HEAD
+[v0.3.5]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.5
+[all changes since v0.3.4]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.4...v0.3.5
 [v0.3.4]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.4
-[all changes since v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.3...HEAD
+[all changes since v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.3...v0.3.4
 [v0.3.3]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.3
 [all changes since v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/releases/tag/v0.3.2
