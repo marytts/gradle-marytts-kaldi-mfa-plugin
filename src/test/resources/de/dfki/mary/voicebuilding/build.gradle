@@ -49,6 +49,7 @@ task convertTextPrompts(type: ConvertTextPrompts) {
 
 convertTextToMaryXml {
     srcDir = convertTextPrompts.destDir
+    locale = Locale.UK
 }
 
 task testConvertTextToMaryXml {
