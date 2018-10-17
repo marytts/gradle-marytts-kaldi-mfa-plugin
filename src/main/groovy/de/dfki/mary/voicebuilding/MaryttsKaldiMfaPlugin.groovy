@@ -37,6 +37,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             group = 'MFA'
             description = 'Converts text files to MaryXML for pronunciation prediction (G2P)'
             srcDir = project.layout.buildDirectory.dir('text')
+            locale = Locale.US
             destDir = project.layout.buildDirectory.dir('maryxml')
         }
 

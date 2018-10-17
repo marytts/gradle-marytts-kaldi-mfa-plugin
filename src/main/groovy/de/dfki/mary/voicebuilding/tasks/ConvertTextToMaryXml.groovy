@@ -3,9 +3,13 @@ package de.dfki.mary.voicebuilding.tasks
 import groovy.json.JsonBuilder
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 
 class ConvertTextToMaryXml extends DefaultTask {
+
+    @Input
+    Property<Locale> locale = project.objects.property(Locale)
 
     @InputDirectory
     final DirectoryProperty srcDir = newInputDirectory()
@@ -15,9 +19,10 @@ class ConvertTextToMaryXml extends DefaultTask {
 
     @TaskAction
     void convert() {
+        def localeStr = locale.get().toLanguageTag()
         def requests = project.fileTree(srcDir).include('*.txt').collect { txtFile ->
             def xmlFile = destDir.file(txtFile.name - '.txt' + '.xml').get().asFile
-            [locale          : 'en_US',
+            [locale          : localeStr,
              inputType       : 'TEXT',
              inputFile       : txtFile.path,
              outputType      : 'ALLOPHONES',
