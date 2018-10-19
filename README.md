@@ -56,6 +56,7 @@ Applying this plugin to a project adds several tasks, which are configured as fo
 ### `convertTextToMaryXml`
 Converts text files to MaryXML for pronunciation prediction (G2P)
 #### Inputs
+- `locale`, default: `Locale.US`
 - `srcDir`, default: `layout.buildDirectory.dir('text')`
 #### Outputs
 - `destDir`, default: `layout.buildDirectory.dir('maryxml')`
@@ -129,6 +130,43 @@ Run
 ```
 after which the resulting TextGrid files will be under `build/TextGrid`.
 
+### G2P for other languages
+
+To use MaryTTS to predict the pronunciation for languages other than US English, two things must be configured:
+
+1. The `locale` property of the `convertTextToMaryXml` task must be set to the target locale, e.g.,
+    ```groovy
+    convertTextToMaryXml {
+        locale = Locale.GERMAN
+    }
+    ```
+    for German, or
+    ```groovy
+    convertTextToMaryXml {
+        locale = Locale.forLanguageTag("pl-PL")
+    }
+    ```
+    for Polish.
+1. The required MaryTTS language component must be added as a dependency to the `marytts` configuration, e.g.,
+    ```groovy
+    dependencies {
+        marytts group: 'de.dfki.mary', name: 'marytts-lang-de', version: '5.2'
+    }
+    ```
+    for German, or
+    ```groovy
+    repositories {
+        maven {
+            url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/'
+        }
+    }
+    
+    dependencies {
+        marytts group: 'de.dfki.mary', name: 'marytts-lang-pl', version: '0.1.0-SNAPSHOT'
+    }
+    ```
+    to resolve a proof-of-concept [language component for Polish] from [OJO].
+
 ### Optional post-processing
 
 In order to use the TextGrids for voicebuilding with [MaryTTS] you have to replace the `sil` and `sp` labels with `_` and convert them to `lab` files in Xwaves format.
@@ -153,6 +191,8 @@ convertTextGridToXLab.tgDir = file("$buildDir/TextGrid")
 
 [CLI documentation]: https://montreal-forced-aligner.readthedocs.io/en/v1.0.0/aligning.html#common-options-for-both-aligner-executables
 [Kaldi]: http://kaldi-asr.org/
+[language component for Polish]: https://github.com/marytts/marytts-lang-pl
 [MaryTTS]: http://mary.dfki.de/
 [Montreal Forced Aligner]: https://montrealcorpustools.github.io/Montreal-Forced-Aligner/
+[OJO]: https://oss.jfrog.org/
 [SoX]: http://sox.sourceforge.net/

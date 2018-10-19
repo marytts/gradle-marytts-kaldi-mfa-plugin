@@ -4,6 +4,10 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+### Added
+
+- support for languages other than US English
+
 ### Changed
 
 - [all changes since v0.3.5]
