@@ -7,7 +7,7 @@ import org.gradle.internal.os.OperatingSystem
 
 class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
-    final String mfaVersion = '1.0.0'
+    final String mfaVersion = '1.1.0-beta.2'
 
     @Override
     void apply(Project project) {
