@@ -9,7 +9,7 @@ import org.gradle.internal.os.OperatingSystem
 class RunForcedAlignment extends DefaultTask {
 
     @InputDirectory
-    final DirectoryProperty srcDir = newInputDirectory()
+    final DirectoryProperty srcDir = project.objects.directoryProperty()
 
     @Input
     Property<Integer> speakerChars = project.objects.property(Integer)
@@ -33,10 +33,10 @@ class RunForcedAlignment extends DefaultTask {
     Property<Boolean> ignoreExceptions = project.objects.property(Boolean)
 
     @OutputDirectory
-    final DirectoryProperty modelDir = newOutputDirectory()
+    final DirectoryProperty modelDir = project.objects.directoryProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void run() {

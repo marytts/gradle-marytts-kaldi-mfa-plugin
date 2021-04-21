@@ -2,6 +2,7 @@ package de.dfki.mary.voicebuilding.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 
@@ -10,16 +11,16 @@ import org.m2ci.msp.jtgt.io.*
 class ConvertTextGridToXLab extends DefaultTask {
 
     @InputDirectory
-    final DirectoryProperty srcDir = newInputDirectory()
+    final DirectoryProperty srcDir = project.objects.directoryProperty()
 
     @Input
-    final Property<Map> labelMapping = project.objects.property(Map)
+    final MapProperty<String, String> labelMapping = project.objects.mapProperty(String, String)
 
     @Input
     final Property<String> tiername = project.objects.property(String)
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void convert() {
