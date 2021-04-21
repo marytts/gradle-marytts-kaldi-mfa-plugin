@@ -24,6 +24,9 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                 patternLayout {
                     artifact '[revision]-[classifier].[ext]'
                 }
+                metadataSources {
+                    artifact()
+                }
             }
         }
 
