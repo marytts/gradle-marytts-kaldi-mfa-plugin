@@ -4,8 +4,13 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+### Added
+
+- CI testing with Java 11
+
 ### Changed
 
+- CI testing macOS versions only for 10.14 (Mojave)
 - [all changes since v0.3.6]
 
 [v0.3.6] (2018-10-19)
