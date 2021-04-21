@@ -8,13 +8,13 @@ import org.gradle.api.tasks.*
 class ProcessMaryXml extends DefaultTask {
 
     @InputDirectory
-    final DirectoryProperty srcDir = newInputDirectory()
+    final DirectoryProperty srcDir = project.objects.directoryProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @OutputFile
-    final RegularFileProperty dictFile = newOutputFile()
+    final RegularFileProperty dictFile = project.objects.fileProperty()
 
     @TaskAction
     void convert() {

@@ -23,14 +23,14 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.m2ci.msp', name: 'jtgt', version: '0.6.1'
-    runtime group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
+    implementation group: 'org.m2ci.msp', name: 'jtgt', version: '0.6.1'
+    runtimeOnly group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
         exclude group: '*', module: 'groovy-all'
     }
-    runtime group: 'de.dfki.mary', name: 'marytts-lang-en', version: '5.2', {
+    runtimeOnly group: 'de.dfki.mary', name: 'marytts-lang-en', version: '5.2', {
         exclude group: '*', module: 'groovy-all'
     }
-    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+    testImplementation group: 'org.testng', name: 'testng', version: '6.14.3'
 }
 
 test {

@@ -7,16 +7,16 @@ import org.gradle.api.tasks.*
 class PrepareForcedAlignment extends DefaultTask {
 
     @InputDirectory
-    final DirectoryProperty wavDir = newInputDirectory()
+    final DirectoryProperty wavDir = project.objects.directoryProperty()
 
     @InputDirectory
-    final DirectoryProperty mfaLabDir = newInputDirectory()
+    final DirectoryProperty mfaLabDir = project.objects.directoryProperty()
 
     @InputFile
-    final RegularFileProperty dictFile = newInputFile()
+    final RegularFileProperty dictFile = project.objects.fileProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void prepare() {

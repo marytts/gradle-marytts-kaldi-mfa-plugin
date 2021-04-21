@@ -9,13 +9,13 @@ import org.gradle.api.tasks.*
 class ConvertTextToMaryXml extends DefaultTask {
 
     @Input
-    Property<Locale> locale = project.objects.property(Locale)
+    final Property<Locale> locale = project.objects.property(Locale)
 
     @InputDirectory
-    final DirectoryProperty srcDir = newInputDirectory()
+    final DirectoryProperty srcDir = project.objects.directoryProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void convert() {

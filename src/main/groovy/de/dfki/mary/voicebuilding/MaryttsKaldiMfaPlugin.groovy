@@ -21,8 +21,11 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             jcenter()
             ivy {
                 url 'https://github.com/marytts/montreal-forced-aligner-release-assets/archive'
-                layout 'pattern', {
+                patternLayout {
                     artifact '[revision]-[classifier].[ext]'
+                }
+                metadataSources {
+                    artifact()
                 }
             }
         }

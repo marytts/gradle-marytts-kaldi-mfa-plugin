@@ -8,15 +8,22 @@ configurations {
 
 repositories {
     ivy {
-        url "http://dl.bintray.com/marytts/marytts"
-        layout 'pattern', {
+        url "https://dl.bintray.com/marytts/marytts"
+        patternLayout {
             artifact '[organisation]/[module]/[module].[ext]'
+        }
+        metadataSources {
+            artifact()
         }
     }
     ivy {
         url 'http://festvox.org/examples'
-        layout 'pattern', {
+        allowInsecureProtocol = true
+        patternLayout {
             artifact '[module]_[classifier]/packed/[module].[ext]'
+        }
+        metadataSources {
+            artifact()
         }
     }
 }
@@ -109,10 +116,10 @@ task testConvertTextGridToXLab {
 class ConvertTextPrompts extends DefaultTask {
 
     @InputFile
-    final RegularFileProperty srcFile = newInputFile()
+    final RegularFileProperty srcFile = project.objects.fileProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void convert() {

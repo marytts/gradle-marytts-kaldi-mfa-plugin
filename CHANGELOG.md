@@ -10,6 +10,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ### Changed
 
+- build with Gradle v6.4.1
 - CI testing macOS versions only for 10.14 (Mojave)
 - [all changes since v0.3.6]
 

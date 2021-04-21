@@ -9,34 +9,34 @@ import org.gradle.internal.os.OperatingSystem
 class RunForcedAlignment extends DefaultTask {
 
     @InputDirectory
-    final DirectoryProperty srcDir = newInputDirectory()
+    final DirectoryProperty srcDir = project.objects.directoryProperty()
 
     @Input
-    Property<Integer> speakerChars = project.objects.property(Integer)
+    final Property<Integer> speakerChars = project.objects.property(Integer)
 
     @Input
-    Property<Boolean> fast = project.objects.property(Boolean)
+    final Property<Boolean> fast = project.objects.property(Boolean)
 
     @Input
-    Property<Integer> numJobs = project.objects.property(Integer)
+    final Property<Integer> numJobs = project.objects.property(Integer)
 
     @Input
-    Property<Boolean> noDict = project.objects.property(Boolean)
+    final Property<Boolean> noDict = project.objects.property(Boolean)
 
     @Input
-    Property<Boolean> clean = project.objects.property(Boolean)
+    final Property<Boolean> clean = project.objects.property(Boolean)
 
     @Input
-    Property<Boolean> debug = project.objects.property(Boolean)
+    final Property<Boolean> debug = project.objects.property(Boolean)
 
     @Input
-    Property<Boolean> ignoreExceptions = project.objects.property(Boolean)
+    final Property<Boolean> ignoreExceptions = project.objects.property(Boolean)
 
     @OutputDirectory
-    final DirectoryProperty modelDir = newOutputDirectory()
+    final DirectoryProperty modelDir = project.objects.directoryProperty()
 
     @OutputDirectory
-    final DirectoryProperty destDir = newOutputDirectory()
+    final DirectoryProperty destDir = project.objects.directoryProperty()
 
     @TaskAction
     void run() {
