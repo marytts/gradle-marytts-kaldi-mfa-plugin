@@ -1,5 +1,5 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Build Status](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin.svg?branch=master)](https://travis-ci.org/marytts/gradle-marytts-kaldi-mfa-plugin)
+[![CI](https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/actions/workflows/main.yml/badge.svg)](https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin/actions/workflows/main.yml)
 
 Gradle MaryTTS Kaldi MFA plugin
 ===============================
@@ -15,11 +15,11 @@ In your project directory, place the audio and text files under your `build` dir
 ```
 build
 ├── text
-│   ├── utt0001.txt
-│   ├── utt0002.txt
-│   ├── utt0003.txt
-│   ├── utt0004.txt
-│   └── utt0005.txt
+│   ├── utt0001.txt
+│   ├── utt0002.txt
+│   ├── utt0003.txt
+│   ├── utt0004.txt
+│   └── utt0005.txt
 └── wav
     ├── utt0001.wav
     ├── utt0002.wav
