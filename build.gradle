@@ -37,6 +37,7 @@ test {
     useTestNG()
     failFast = true
     testLogging {
+        showStandardStreams = true
         exceptionFormat = 'full'
     }
 }
