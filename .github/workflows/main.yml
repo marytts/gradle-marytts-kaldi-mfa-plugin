@@ -21,6 +21,12 @@ jobs:
           distribution: zulu
           java-version: ${{ matrix.java }}
 
+      - env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq install libatlas3-base
+
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: build
