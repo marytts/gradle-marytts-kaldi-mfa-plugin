@@ -19,6 +19,18 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
         project.repositories {
             jcenter()
+
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        url 'https://oss.sonatype.org/content/repositories/snapshots'
+                    }
+                }
+                filter {
+                    includeModule 'de.dfki.mary', 'marytts-voicebuilding'
+                }
+            }
+
             ivy {
                 url 'https://github.com/marytts/montreal-forced-aligner-release-assets/archive'
                 patternLayout {
@@ -31,7 +43,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            marytts 'de.dfki.mary:marytts-voicebuilding:0.1'
+            marytts 'de.dfki.mary:marytts-voicebuilding:0.2-SNAPSHOT'
             marytts 'de.dfki.mary:marytts-lang-en:5.2'
             mfa getMFADependencyFor(project)
         }
