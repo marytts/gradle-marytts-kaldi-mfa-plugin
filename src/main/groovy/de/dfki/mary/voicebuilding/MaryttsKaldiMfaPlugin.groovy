@@ -18,7 +18,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.repositories {
-            jcenter()
+            mavenCentral()
 
             exclusiveContent {
                 forRepository {
@@ -28,6 +28,17 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
                 }
                 filter {
                     includeModule 'de.dfki.mary', 'marytts-voicebuilding'
+                }
+            }
+
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        url 'https://mlt.jfrog.io/artifactory/mlt-mvn-releases-local'
+                    }
+                }
+                filter {
+                    includeGroup 'de.dfki.lt.jtok'
                 }
             }
 
@@ -44,7 +55,10 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
 
         project.dependencies {
             marytts 'de.dfki.mary:marytts-voicebuilding:0.2-SNAPSHOT'
-            marytts 'de.dfki.mary:marytts-lang-en:5.2'
+            marytts 'de.dfki.mary:marytts-lang-en:5.2.1', {
+                exclude group: 'com.twmacinta', module: 'fast-md5'
+                exclude group: 'gov.nist.math', module: 'Jampack'
+            }
             mfa getMFADependencyFor(project)
         }
 
