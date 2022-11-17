@@ -8,11 +8,22 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 - CI testing with Java 11
 
+### Removed
+
+- Reliance on Bintray/JCenter
+
+### Fixed
+
+- Gradle deprecations
+
 ### Changed
 
-- build with Gradle v6.4.1
+- Build with Gradle v7.5.1
 - CI testing macOS versions only for 10.14 (Mojave)
-- migrate from Travis CI to GitHub Actions
+- Migrated from Travis CI to GitHub Actions
+- Upgraded MaryTTS to v5.2.1
+- Upgraded jtgt to v0.7.0
+- Upgraded external dependencies
 - [all changes since v0.3.6]
 
 [v0.3.6] (2018-10-19)

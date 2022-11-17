@@ -18,7 +18,30 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.repositories {
-            jcenter()
+            mavenCentral()
+
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        url 'https://oss.sonatype.org/content/repositories/snapshots'
+                    }
+                }
+                filter {
+                    includeModule 'de.dfki.mary', 'marytts-voicebuilding'
+                }
+            }
+
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        url 'https://mlt.jfrog.io/artifactory/mlt-mvn-releases-local'
+                    }
+                }
+                filter {
+                    includeGroup 'de.dfki.lt.jtok'
+                }
+            }
+
             ivy {
                 url 'https://github.com/marytts/montreal-forced-aligner-release-assets/archive'
                 patternLayout {
@@ -31,37 +54,40 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            marytts 'de.dfki.mary:marytts-voicebuilding:0.1'
-            marytts 'de.dfki.mary:marytts-lang-en:5.2'
+            marytts 'de.dfki.mary:marytts-voicebuilding:0.2-SNAPSHOT'
+            marytts 'de.dfki.mary:marytts-lang-en:5.2.1', {
+                exclude group: 'com.twmacinta', module: 'fast-md5'
+                exclude group: 'gov.nist.math', module: 'Jampack'
+            }
             mfa getMFADependencyFor(project)
         }
 
-        project.task('convertTextToMaryXml', type: ConvertTextToMaryXml) {
+        def convertTextToMaryXmlTask = project.tasks.register('convertTextToMaryXml', ConvertTextToMaryXml) {
             group = 'MFA'
             description = 'Converts text files to MaryXML for pronunciation prediction (G2P)'
-            srcDir = project.layout.buildDirectory.dir('text')
-            locale = Locale.US
-            destDir = project.layout.buildDirectory.dir('maryxml')
+            srcDir.set project.layout.buildDirectory.dir('text')
+            locale.set Locale.US
+            destDir.set project.layout.buildDirectory.dir('maryxml')
         }
 
-        project.task('processMaryXml', type: ProcessMaryXml) {
+        def processMaryXmlTask = project.tasks.register('processMaryXml', ProcessMaryXml) {
             group = 'MFA'
             description = 'Extracts text input files from MaryXML and generates custom dictionary for MFA'
-            srcDir = project.convertTextToMaryXml.destDir
-            destDir = project.layout.buildDirectory.dir('mfaLab')
-            dictFile = project.layout.buildDirectory.file('dict.txt')
+            srcDir.set convertTextToMaryXmlTask.get().destDir
+            destDir.set project.layout.buildDirectory.dir('mfaLab')
+            dictFile.set project.layout.buildDirectory.file('dict.txt')
         }
 
-        project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
+        def prepareForcedAlignmentTask = project.tasks.register('prepareForcedAlignment', PrepareForcedAlignment) {
             group = 'MFA'
             description = 'Collects audio and text input files and custom dictionary for MFA'
-            wavDir = project.layout.buildDirectory.dir('wav')
-            mfaLabDir = project.processMaryXml.destDir
-            dictFile = project.processMaryXml.dictFile
-            destDir = project.layout.buildDirectory.dir('forcedAlignment')
+            wavDir.set project.layout.buildDirectory.dir('wav')
+            mfaLabDir.set processMaryXmlTask.get().destDir
+            dictFile.set processMaryXmlTask.get().dictFile
+            destDir.set project.layout.buildDirectory.dir('forcedAlignment')
         }
 
-        project.task('unpackMFA', type: Copy) {
+        project.tasks.register('unpackMFA', Copy) {
             group = 'MFA'
             description = 'Downloads and unpacks MFA'
             from project.configurations.mfa
@@ -90,29 +116,29 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             }
         }
 
-        project.task('runForcedAlignment', type: RunForcedAlignment) {
+        def runForcedAlignmentTask = project.tasks.register('runForcedAlignment', RunForcedAlignment) {
             group = 'MFA'
             description = 'Runs MFA to generate Praat TextGrids'
             dependsOn project.unpackMFA
-            srcDir = project.prepareForcedAlignment.destDir
-            modelDir = project.layout.buildDirectory.dir('kaldiModels')
-            destDir = project.layout.buildDirectory.dir('TextGrid')
-            speakerChars = 0
-            fast = false
-            numJobs = project.gradle.startParameter.maxWorkerCount
-            noDict = false
-            clean = false
-            debug = false
-            ignoreExceptions = false
+            srcDir.set prepareForcedAlignmentTask.get().destDir
+            modelDir.set project.layout.buildDirectory.dir('kaldiModels')
+            destDir.set project.layout.buildDirectory.dir('TextGrid')
+            speakerChars.set 0
+            fast.set false
+            numJobs.set project.gradle.startParameter.maxWorkerCount
+            noDict.set false
+            clean.set false
+            debug.set false
+            ignoreExceptions.set false
         }
 
-        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
+        project.tasks.register('convertTextGridToXLab', ConvertTextGridToXLab) {
             group = 'MFA'
             description = 'Converts Praat TextGrids to XWaves lab format (with label mapping)'
-            srcDir = project.runForcedAlignment.destDir
-            tiername = 'phones'
-            labelMapping = [sil: '_', sp: '_']
-            destDir = project.layout.buildDirectory.dir('lab')
+            srcDir.set runForcedAlignmentTask.get().destDir
+            tiername.set 'phones'
+            labelMapping.set([sil: '_', sp: '_'])
+            destDir.set project.layout.buildDirectory.dir('lab')
         }
     }
 

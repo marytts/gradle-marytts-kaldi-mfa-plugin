@@ -19,24 +19,19 @@ gradlePlugin {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation group: 'org.m2ci.msp', name: 'jtgt', version: '0.6.1'
-    runtimeOnly group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.1', {
-        exclude group: '*', module: 'groovy-all'
-    }
-    runtimeOnly group: 'de.dfki.mary', name: 'marytts-lang-en', version: '5.2', {
-        exclude group: '*', module: 'groovy-all'
-    }
-    testImplementation group: 'org.testng', name: 'testng', version: '6.14.3'
+    implementation group: 'io.github.m2ci-msp', name: 'jtgt', version: '0.7.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
 }
 
 test {
     useTestNG()
     failFast = true
     testLogging {
+        showStandardStreams = true
         exceptionFormat = 'full'
     }
 }

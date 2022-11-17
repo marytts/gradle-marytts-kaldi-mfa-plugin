@@ -8,15 +8,6 @@ configurations {
 
 repositories {
     ivy {
-        url "https://dl.bintray.com/marytts/marytts"
-        patternLayout {
-            artifact '[organisation]/[module]/[module].[ext]'
-        }
-        metadataSources {
-            artifact()
-        }
-    }
-    ivy {
         url 'http://festvox.org/examples'
         allowInsecureProtocol = true
         patternLayout {

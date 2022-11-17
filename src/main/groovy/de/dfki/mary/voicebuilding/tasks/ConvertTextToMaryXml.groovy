@@ -33,7 +33,7 @@ class ConvertTextToMaryXml extends DefaultTask {
         jsonFile.text = new JsonBuilder(requests).toPrettyString()
         project.javaexec {
             classpath project.configurations.marytts
-            main = 'marytts.BatchProcessor'
+            mainClass = 'marytts.BatchProcessor'
             args = [jsonFile]
         }
     }
