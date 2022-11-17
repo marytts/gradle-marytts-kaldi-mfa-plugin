@@ -150,7 +150,7 @@ To use MaryTTS to predict the pronunciation for languages other than US English,
 1. The required MaryTTS language component must be added as a dependency to the `marytts` configuration, e.g.,
     ```groovy
     dependencies {
-        marytts group: 'de.dfki.mary', name: 'marytts-lang-de', version: '5.2'
+        marytts group: 'de.dfki.mary', name: 'marytts-lang-de', version: '5.2.1'
     }
     ```
     for German, or
