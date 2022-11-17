@@ -62,7 +62,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             mfa getMFADependencyFor(project)
         }
 
-        project.task('convertTextToMaryXml', type: ConvertTextToMaryXml) {
+        def convertTextToMaryXmlTask = project.tasks.register('convertTextToMaryXml', ConvertTextToMaryXml) {
             group = 'MFA'
             description = 'Converts text files to MaryXML for pronunciation prediction (G2P)'
             srcDir.set project.layout.buildDirectory.dir('text')
@@ -70,24 +70,24 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             destDir.set project.layout.buildDirectory.dir('maryxml')
         }
 
-        project.task('processMaryXml', type: ProcessMaryXml) {
+        def processMaryXmlTask = project.tasks.register('processMaryXml', ProcessMaryXml) {
             group = 'MFA'
             description = 'Extracts text input files from MaryXML and generates custom dictionary for MFA'
-            srcDir.set project.convertTextToMaryXml.destDir
+            srcDir.set convertTextToMaryXmlTask.get().destDir
             destDir.set project.layout.buildDirectory.dir('mfaLab')
             dictFile.set project.layout.buildDirectory.file('dict.txt')
         }
 
-        project.task('prepareForcedAlignment', type: PrepareForcedAlignment) {
+        def prepareForcedAlignmentTask = project.tasks.register('prepareForcedAlignment', PrepareForcedAlignment) {
             group = 'MFA'
             description = 'Collects audio and text input files and custom dictionary for MFA'
             wavDir.set project.layout.buildDirectory.dir('wav')
-            mfaLabDir.set project.processMaryXml.destDir
-            dictFile.set project.processMaryXml.dictFile
+            mfaLabDir.set processMaryXmlTask.get().destDir
+            dictFile.set processMaryXmlTask.get().dictFile
             destDir.set project.layout.buildDirectory.dir('forcedAlignment')
         }
 
-        project.task('unpackMFA', type: Copy) {
+        project.tasks.register('unpackMFA', Copy) {
             group = 'MFA'
             description = 'Downloads and unpacks MFA'
             from project.configurations.mfa
@@ -116,11 +116,11 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             }
         }
 
-        project.task('runForcedAlignment', type: RunForcedAlignment) {
+        def runForcedAlignmentTask = project.tasks.register('runForcedAlignment', RunForcedAlignment) {
             group = 'MFA'
             description = 'Runs MFA to generate Praat TextGrids'
             dependsOn project.unpackMFA
-            srcDir.set project.prepareForcedAlignment.destDir
+            srcDir.set prepareForcedAlignmentTask.get().destDir
             modelDir.set project.layout.buildDirectory.dir('kaldiModels')
             destDir.set project.layout.buildDirectory.dir('TextGrid')
             speakerChars.set 0
@@ -132,10 +132,10 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             ignoreExceptions.set false
         }
 
-        project.task('convertTextGridToXLab', type: ConvertTextGridToXLab) {
+        project.tasks.register('convertTextGridToXLab', ConvertTextGridToXLab) {
             group = 'MFA'
             description = 'Converts Praat TextGrids to XWaves lab format (with label mapping)'
-            srcDir.set project.runForcedAlignment.destDir
+            srcDir.set runForcedAlignmentTask.get().destDir
             tiername.set 'phones'
             labelMapping.set([sil: '_', sp: '_'])
             destDir.set project.layout.buildDirectory.dir('lab')
