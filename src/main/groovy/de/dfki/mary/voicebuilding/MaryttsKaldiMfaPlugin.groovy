@@ -23,17 +23,6 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             exclusiveContent {
                 forRepository {
                     maven {
-                        url 'https://oss.sonatype.org/content/repositories/snapshots'
-                    }
-                }
-                filter {
-                    includeModule 'de.dfki.mary', 'marytts-voicebuilding'
-                }
-            }
-
-            exclusiveContent {
-                forRepository {
-                    maven {
                         url 'https://mlt.jfrog.io/artifactory/mlt-mvn-releases-local'
                     }
                 }
@@ -54,7 +43,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            marytts 'de.dfki.mary:marytts-voicebuilding:0.2-SNAPSHOT'
+            marytts group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.2.0'
             marytts 'de.dfki.mary:marytts-lang-en:5.2.1', {
                 exclude group: 'com.twmacinta', module: 'fast-md5'
                 exclude group: 'gov.nist.math', module: 'Jampack'
