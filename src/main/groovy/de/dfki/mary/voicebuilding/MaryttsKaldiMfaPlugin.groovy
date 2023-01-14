@@ -43,7 +43,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            marytts group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.2.0'
+            marytts group: 'de.dfki.mary', name: 'marytts-voicebuilding', version: '0.2.1'
             marytts 'de.dfki.mary:marytts-lang-en:5.2.1', {
                 exclude group: 'com.twmacinta', module: 'fast-md5'
                 exclude group: 'gov.nist.math', module: 'Jampack'
