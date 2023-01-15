@@ -6,7 +6,8 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ### Added
 
-- CI testing with Java 11
+- CI testing with Java 11 and 17
+- CI testing on macOS
 
 ### Removed
 
@@ -15,13 +16,14 @@ Gradle MaryTTS Kaldi MFA Plugin
 ### Fixed
 
 - Gradle deprecations
+- Errors with JavaExec on Java 17
 
 ### Changed
 
 - Build with Gradle v7.5.1
 - CI testing macOS versions only for 10.14 (Mojave)
 - Migrated from Travis CI to GitHub Actions
-- Upgraded MaryTTS to v5.2.1
+- Upgraded MaryTTS to v5.2.1, voicebuilding to v0.2.1
 - Upgraded jtgt to v0.7.0
 - Upgraded external dependencies
 - [all changes since v0.3.6]
