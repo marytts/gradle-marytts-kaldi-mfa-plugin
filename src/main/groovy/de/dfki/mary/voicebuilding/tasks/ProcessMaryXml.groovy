@@ -1,5 +1,6 @@
 package de.dfki.mary.voicebuilding.tasks
 
+import groovy.xml.XmlSlurper
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
