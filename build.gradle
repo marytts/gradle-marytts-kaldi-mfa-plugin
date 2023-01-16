@@ -15,12 +15,6 @@ pluginBundle {
     vcsUrl = pluginUrl
     description = project.description
     tags = ['text-to-speech', 'kaldi', 'marytts', 'forced-alignment']
-
-    plugins {
-        maryttsKaldiMfaPlugin {
-            displayName = 'Gradle MaryTTS Kaldi MFA plugin'
-        }
-    }
 }
 
 gradlePlugin {
@@ -28,6 +22,7 @@ gradlePlugin {
         maryttsKaldiMfaPlugin {
             id = 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
             implementationClass = 'de.dfki.mary.voicebuilding.MaryttsKaldiMfaPlugin'
+            displayName = 'Gradle MaryTTS Kaldi MFA plugin'
         }
     }
 }
