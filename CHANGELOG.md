@@ -21,11 +21,11 @@ Gradle MaryTTS Kaldi MFA Plugin
 ### Changed
 
 - Build with Gradle v7.5.1
-- CI testing macOS versions only for 10.14 (Mojave)
 - Migrated from Travis CI to GitHub Actions
 - Upgraded MaryTTS to v5.2.1, voicebuilding to v0.2.1
 - Upgraded jtgt to v0.7.0
 - Upgraded external dependencies
+- Upgraded plugins, build logic
 - [all changes since v0.3.6]
 
 [v0.3.6] (2018-10-19)
