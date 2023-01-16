@@ -34,26 +34,15 @@ dependencies {
     testImplementation group: 'org.testng', name: 'testng', version: '7.5'
 }
 
+java {
+    withSourcesJar()
+}
+
 test {
     useTestNG()
     failFast = true
     testLogging {
         showStandardStreams = true
         exceptionFormat = 'full'
-    }
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourceJar {
-                classifier 'sources'
-            }
-        }
     }
 }
