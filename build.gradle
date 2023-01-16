@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'de.dfki.mary'
-version '0.4-SNAPSHOT'
+version '0.5.0-SNAPSHOT'
 description 'Forced alignment based on MaryTTS, Kaldi, and MFA'
 
 pluginBundle {
