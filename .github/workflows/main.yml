@@ -40,6 +40,6 @@ jobs:
           sudo apt-get -qq update &&
           sudo apt-get -qq install libatlas3-base
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v2.11.1
         with:
           arguments: build --warning-mode all
