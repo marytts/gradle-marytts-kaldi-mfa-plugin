@@ -23,7 +23,7 @@ class MaryttsKaldiMfaPlugin implements Plugin<Project> {
             exclusiveContent {
                 forRepository {
                     maven {
-                        url 'https://mlt.jfrog.io/artifactory/mlt-mvn-releases-local'
+                        url 'https://raw.githubusercontent.com/DFKI-MLT/Maven-Repository/main'
                     }
                 }
                 filter {
