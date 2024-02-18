@@ -4,8 +4,16 @@ Gradle MaryTTS Kaldi MFA Plugin
 [Unreleased]
 ------------
 
+### Fixed
+
+- Replaced dead repo for JTok dependency
+
 ### Changed
 
+- Build with Gradle v7.6.3
+- Upgraded GitHub actions
+- Upgraded dependencies
+- Upgraded plugins
 - [all changes since v0.4.0]
 
 [v0.4.0] (2023-01-16)
