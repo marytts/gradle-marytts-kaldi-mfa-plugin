@@ -10,7 +10,7 @@ Gradle MaryTTS Kaldi MFA Plugin
 
 ### Changed
 
-- Build with Gradle v7.6.3
+- Build with Gradle v7.6.4
 - Upgraded GitHub actions
 - Upgraded dependencies
 - Upgraded plugins
